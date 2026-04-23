@@ -14,29 +14,29 @@
       theme: {
         extend: {
           colors: {
-            "primary": "#e9feff",
-            "secondary": "#94d3c1",
-            "on-secondary": "#00382e",
-            "secondary-container": "#0b5345",
-            "surface-container": "#1e2020",
-            "on-surface-variant": "#b9caca",
-            "surface-tint": "#00dce5",
-            "on-primary-container": "#006c71",
-            "on-surface": "#e2e2e2",
-            "surface-container-low": "#1a1c1c",
-            "surface-dim": "#121414",
-            "on-secondary-container": "#86c5b3",
-            "surface-container-lowest": "#0d0e0f",
-            "on-primary": "#003739",
-            "background": "#121414",
-            "surface-container-high": "#282a2b",
-            "surface-container-highest": "#333535",
-            "surface": "#121414",
-            "inverse-surface": "#e2e2e2",
-            "primary-container": "#00f5ff",
-            "primary-fixed": "#63f7ff",
-            "on-background": "#e2e2e2",
-            "secondary-fixed": "#afefdd",
+            "primary": "#ccffe8",
+            "secondary": "#39FF14",
+            "on-secondary": "#003a10",
+            "secondary-container": "#0a4020",
+            "surface-container": "#1a201c",
+            "on-surface-variant": "#9dcaac",
+            "surface-tint": "#00FF88",
+            "on-primary-container": "#00cc55",
+            "on-surface": "#e2ede6",
+            "surface-container-low": "#161d18",
+            "surface-dim": "#0e1510",
+            "on-secondary-container": "#7dff9a",
+            "surface-container-lowest": "#0b1010",
+            "on-primary": "#003318",
+            "background": "#0e1510",
+            "surface-container-high": "#222d25",
+            "surface-container-highest": "#2d3d30",
+            "surface": "#0e1510",
+            "inverse-surface": "#e2ede6",
+            "primary-container": "#00FF88",
+            "primary-fixed": "#39FF14",
+            "on-background": "#e2ede6",
+            "secondary-fixed": "#a0ffb8",
             "error": "#ffb4ab",
           },
           fontFamily: {
@@ -61,52 +61,65 @@
   </script>
 
   <style>
-    /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; }
-    body { background: #121414; color: #e2e2e2; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
+    body { background: #0e1510; color: #e2ede6; overflow-x: hidden; }
     .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
 
-    /* ── Custom cursor ── */
-    * { cursor: none !important; }
-    #cursor { position:fixed; top:0;left:0;width:12px;height:12px;border-radius:50%;
-      background:#00f5ff;pointer-events:none;z-index:9999;
-      transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s,opacity .2s;
-      mix-blend-mode:difference;}
-    #cursor-ring { position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;
-      border:1px solid rgba(0,245,255,.4);pointer-events:none;z-index:9998;
-      transform:translate(-50%,-50%);transition:transform .08s,width .3s,height .3s;}
-    body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:20px;height:20px;opacity:.6;}
-    body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:56px;height:56px;}
+    /* ── Custom cursor (desktop only) ── */
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+    }
+    #cursor, #cursor-ring {
+      display: none;
+    }
+    @media (pointer: fine) {
+      #cursor { display: block; position:fixed; top:0;left:0;width:12px;height:12px;border-radius:50%;
+        background:#00FF88;pointer-events:none;z-index:9999;
+        transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s,opacity .2s;
+        mix-blend-mode:difference;}
+      #cursor-ring { display: block; position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;
+        border:1px solid rgba(0,255,136,.4);pointer-events:none;z-index:9998;
+        transform:translate(-50%,-50%);transition:transform .08s,width .3s,height .3s;}
+      body:has(a:hover) #cursor, body:has(button:hover) #cursor { width:20px;height:20px;opacity:.6;}
+      body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring { width:56px;height:56px;}
+    }
 
     /* ── Glass ── */
-    .glass { background:rgba(13,14,15,.7);backdrop-filter:blur(12px);border:1px solid rgba(0,245,255,.1); }
-    .glass-panel { background:rgba(18,20,20,.7);backdrop-filter:blur(12px);border:1px solid rgba(0,245,255,.1); }
+    .glass { background:rgba(11,16,12,.75);backdrop-filter:blur(12px);border:1px solid rgba(0,255,136,.12); }
+    .glass-panel { background:rgba(14,21,16,.75);backdrop-filter:blur(12px);border:1px solid rgba(0,255,136,.12); }
 
     /* ── Kinetic borders ── */
     .kinetic-border {
       border:1px solid transparent;
-      background:linear-gradient(#121414,#121414) padding-box,
-                 linear-gradient(to bottom right,#00F5FF,#0b5345) border-box;
+      background:linear-gradient(#0e1510,#0e1510) padding-box,
+                 linear-gradient(to bottom right,#00FF88,#0a4020) border-box;
     }
     .vortex-border {
       border:1px solid transparent;
-      background:linear-gradient(to right,#001a1a,#001a1a) padding-box,
-                 linear-gradient(135deg,#065043,#121414) border-box;
+      background:linear-gradient(to right,#0b1610,#0b1610) padding-box,
+                 linear-gradient(135deg,#0a4020,#0e1510) border-box;
     }
 
     /* ── Animations ── */
-    @keyframes pulse-glow { 0%,100%{filter:drop-shadow(0 0 5px rgba(0,245,255,.5))} 50%{filter:drop-shadow(0 0 15px rgba(0,245,255,.8))} }
-    @keyframes pulse-dot { 0%,100%{opacity:1;filter:drop-shadow(0 0 10px rgba(0,245,255,.5))} 50%{opacity:.7;filter:drop-shadow(0 0 20px rgba(0,245,255,.8))} }
+    @keyframes pulse-glow { 0%,100%{filter:drop-shadow(0 0 5px rgba(0,255,136,.5))} 50%{filter:drop-shadow(0 0 15px rgba(0,255,136,.8))} }
+    @keyframes pulse-dot { 0%,100%{opacity:1;filter:drop-shadow(0 0 10px rgba(0,255,136,.5))} 50%{opacity:.7;filter:drop-shadow(0 0 20px rgba(0,255,136,.8))} }
     @keyframes scan { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
-    @keyframes spin-slow { to{transform:rotate(360deg)} }
-    @keyframes spin-slow-rev { to{transform:rotate(-360deg)} }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
     @keyframes scanline { 0%{top:-2px} 100%{top:100%} }
     @keyframes glitch1 { 0%,95%,100%{clip-path:inset(0 0 100% 0)} 96%{clip-path:inset(20% 0 60% 0);transform:translate(-3px)} 98%{clip-path:inset(60% 0 10% 0);transform:translate(3px)} }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
     @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes reveal { from{clip-path:inset(0 100% 0 0)} to{clip-path:inset(0 0% 0 0)} }
     @keyframes progress { from{width:0} }
+
+    /* Propeller spin */
+    @keyframes propeller-cw  { from{transform:rotate(0deg)}   to{transform:rotate(360deg)} }
+    @keyframes propeller-ccw { from{transform:rotate(0deg)}   to{transform:rotate(-360deg)} }
+    @keyframes blade-expand  { from{transform:scaleY(0) rotate(0deg)} to{transform:scaleY(1) rotate(360deg)} }
+
+    /* Menu overlay slide */
+    @keyframes menuSlideIn { from{opacity:0;transform:scale(.92) rotate(-8deg)} to{opacity:1;transform:scale(1) rotate(0deg)} }
+    @keyframes menuItemIn  { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
 
     .pulse-glow { animation:pulse-glow 3s infinite; }
     .pulse-dot   { animation:pulse-dot 2s cubic-bezier(.4,0,.6,1) infinite; }
@@ -114,56 +127,255 @@
     .float-anim  { animation:float 4s ease-in-out infinite; }
     .blink-cursor{ animation:blink 1s step-end infinite; }
 
-    /* ── Page transition ── */
     .page { display:none; }
     .page.active { display:block; animation:fadeInUp .4s ease both; }
 
-    /* ── Spiral offsets ── */
     .so1 { transform:translateX(1.5rem) translateY(.5rem); }
     .so2 { transform:translateX(3rem) translateY(1rem); }
     .so3 { transform:translateX(4.5rem) translateY(1.5rem); }
+    @media (max-width: 768px) {
+      .so1,.so2,.so3 { transform: none; }
+    }
 
-    /* ── Spiral card 3D ── */
     .spiral-card { transform:perspective(1000px) rotateY(-5deg);transition:all .5s cubic-bezier(.4,0,.2,1); }
-    .spiral-card:hover { transform:perspective(1000px) rotateY(0deg) scale(1.02);box-shadow:0 0 30px rgba(0,245,255,.15); }
+    .spiral-card:hover { transform:perspective(1000px) rotateY(0deg) scale(1.02);box-shadow:0 0 30px rgba(0,255,136,.15); }
+    @media (max-width: 768px) {
+      .spiral-card { transform: none !important; }
+    }
 
-    /* ── Nav item active/inactive ── */
-    .nav-active   { color:#00F5FF;filter:drop-shadow(0 0 15px rgba(0,245,255,.8));transform:scale(1.1) skewX(-12deg); }
-    .nav-inactive { color:#064040;opacity:.4;filter:grayscale(100%);transition:all .3s; }
-    .nav-inactive:hover { color:#00F5FF;opacity:1;filter:none;transform:skewX(-15deg); }
+    .nav-active   { color:#00FF88;filter:drop-shadow(0 0 15px rgba(0,255,136,.8));transform:scale(1.1) skewX(-12deg); }
+    .nav-inactive { color:#0a4020;opacity:.4;filter:grayscale(100%);transition:all .3s; }
+    .nav-inactive:hover { color:#00FF88;opacity:1;filter:none;transform:skewX(-15deg); }
 
-    /* ── Scanline overlay ── */
     .scanline::after {
       content:'';position:absolute;top:-2px;left:0;width:100%;height:2px;
-      background:linear-gradient(90deg,transparent,#00f5ff,transparent);
+      background:linear-gradient(90deg,transparent,#00FF88,transparent);
       opacity:.3;animation:scanline 4s linear infinite;
     }
 
-    /* ── Kinetic scan hover ── */
     .k-scan { position:relative;overflow:hidden; }
     .k-scan::after { content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-      background:linear-gradient(90deg,transparent,rgba(0,245,255,.1),transparent);transition:.5s; }
+      background:linear-gradient(90deg,transparent,rgba(0,255,136,.1),transparent);transition:.5s; }
     .k-scan:hover::after { left:100%; }
 
-    /* ── Progress bars ── */
     .bar-fill { animation:progress 1.4s ease-out both; }
 
-    /* ── Terminal typewriter ── */
     #typewriter-output { font-family:monospace;font-size:.875rem;line-height:1.7; }
 
-    /* ── Glitch title ── */
     .glitch { position:relative; }
-    .glitch::before { content:attr(data-text);position:absolute;inset:0;color:#00f5ff;animation:glitch1 6s infinite; }
+    .glitch::before { content:attr(data-text);position:absolute;inset:0;color:#00FF88;animation:glitch1 6s infinite; }
 
-    /* ── Notification toast ── */
     #toast { position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
       z-index:9999;transition:transform .4s ease; }
     #toast.show { transform:translateX(-50%) translateY(0); }
+
+    /* ══════════════════════════════════
+       RESPONSIVE — Mobile layout
+    ══════════════════════════════════ */
+    /* Side nav hidden on mobile */
+    @media (max-width: 1023px) {
+      #side-nav { display: none !important; }
+      main { margin-left: 0 !important; }
+      footer { margin-left: 0 !important; }
+    }
+
+    /* Headline scaling */
+    @media (max-width: 640px) {
+      .font-headline-xl { font-size: 2.4rem !important; }
+      .font-headline-lg { font-size: 1.8rem !important; }
+      .font-headline-md { font-size: 1.3rem !important; }
+    }
+
+    /* ══════════════════════════════════
+       PROPELLER MENU
+    ══════════════════════════════════ */
+    #propeller-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* The 4 blades */
+    .blade {
+      position: absolute;
+      width: 18px;
+      height: 6px;
+      background: #00FF88;
+      border-radius: 3px;
+      transform-origin: center center;
+      transition: all 0.5s cubic-bezier(.68,-0.6,.32,1.6);
+      box-shadow: 0 0 8px rgba(0,255,136,.6);
+    }
+    .blade-1 { transform: rotate(0deg)   translateX(8px); }
+    .blade-2 { transform: rotate(90deg)  translateX(8px); }
+    .blade-3 { transform: rotate(180deg) translateX(8px); }
+    .blade-4 { transform: rotate(270deg) translateX(8px); }
+
+    /* Center dot */
+    .blade-center {
+      width: 8px;
+      height: 8px;
+      background: #00FF88;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 2;
+      box-shadow: 0 0 12px #00FF88;
+      transition: transform .4s ease;
+    }
+
+    /* Open state → blades spin out */
+    #propeller-btn.open .blade-1 { transform: rotate(45deg)  translateX(12px); }
+    #propeller-btn.open .blade-2 { transform: rotate(135deg) translateX(12px); }
+    #propeller-btn.open .blade-3 { transform: rotate(225deg) translateX(12px); }
+    #propeller-btn.open .blade-4 { transform: rotate(315deg) translateX(12px); }
+    #propeller-btn.open .blade-center { transform: scale(1.5); }
+
+    /* Spin animation on open */
+    #propeller-btn.spinning .blade { animation: propeller-cw .5s cubic-bezier(.4,0,.2,1); }
+
+    /* ── MENU FULLSCREEN OVERLAY ── */
+    #mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(10, 14, 10, 0.97);
+      backdrop-filter: blur(20px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #mobile-menu.open {
+      display: flex;
+      animation: menuSlideIn .4s cubic-bezier(.4,0,.2,1) both;
+    }
+
+    /* Decorative spinning ring behind menu */
+    #mobile-menu::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(0,255,136,.06);
+      border-radius: 50%;
+      animation: propeller-cw 20s linear infinite;
+    }
+    #mobile-menu::after {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(57,255,20,.08);
+      border-radius: 50%;
+      animation: propeller-ccw 12s linear infinite;
+    }
+
+    /* Propeller hub in center of menu */
+    .menu-hub {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      pointer-events: none;
+      animation: propeller-cw 8s linear infinite;
+    }
+    .menu-hub-blade {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 36px; height: 8px;
+      background: linear-gradient(90deg, rgba(0,255,136,.3), transparent);
+      border-radius: 4px;
+      transform-origin: 0 50%;
+      margin-top: -4px;
+    }
+    .menu-hub-blade:nth-child(1) { transform: rotate(0deg); }
+    .menu-hub-blade:nth-child(2) { transform: rotate(90deg); }
+    .menu-hub-blade:nth-child(3) { transform: rotate(180deg); }
+    .menu-hub-blade:nth-child(4) { transform: rotate(270deg); }
+    .menu-hub-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 10px; height: 10px;
+      background: #00FF88;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 16px #00FF88;
+    }
+
+    .menu-nav-item {
+      position: relative;
+      z-index: 10;
+      font-family: 'Epilogue', sans-serif;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: rgba(204,255,232,.2);
+      cursor: pointer;
+      transition: all .3s ease;
+      text-transform: uppercase;
+      padding: .25rem 1.5rem;
+    }
+    .menu-nav-item:hover, .menu-nav-item.active-page {
+      color: #00FF88;
+      text-shadow: 0 0 30px rgba(0,255,136,.6), 0 0 60px rgba(0,255,136,.3);
+      letter-spacing: -0.02em;
+    }
+    .menu-nav-item::before {
+      content: attr(data-index);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .6rem;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: .2em;
+      color: rgba(0,255,136,.3);
+      font-weight: 600;
+    }
+
+    .menu-nav-item.anim-in {
+      animation: menuItemIn .4s ease both;
+    }
+
+    /* ══════════════════════════════════
+       PADDING RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 640px) {
+      .px-\[5vw\] { padding-left: 1rem !important; padding-right: 1rem !important; }
+      #page-about .px-12 { padding-left: 1rem !important; padding-right: 1rem !important; }
+      #page-contact .px-\[5vw\] { padding-left: 1rem !important; padding-right: 1rem !important; }
+    }
+
+    /* ══════════════════════════════════
+       GRID RESPONSIVE FIXES
+    ══════════════════════════════════ */
+    @media (max-width: 768px) {
+      .aspect-video { aspect-ratio: auto; min-height: 160px; }
+    }
+
+    /* Tag chip */
+    .tag-chip { padding:.25rem .75rem;background:rgba(57,255,20,.1);border:1px solid rgba(57,255,20,.2);color:#39FF14;font-size:.625rem;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase; }
+    .active-filter { border-color:rgba(0,255,136,.4)!important;color:#ccffe8!important;background:rgba(0,255,136,.05)!important; }
+    .top-nav-btn { color:#0a4020;opacity:.7; }
+    .top-nav-btn.active { color:#00FF88;font-weight:700;opacity:1; }
+    .scroll-reveal { opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s; }
+    .scroll-reveal.revealed { opacity:1;transform:translateY(0) !important; }
+
+    /* Glow text */
+    .glow-green { text-shadow: 0 0 20px rgba(0,255,136,.5); }
+
+    /* Mobile header height */
+    @media (max-width: 640px) {
+      header { height: 60px !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+      main { padding-top: 60px !important; }
+    }
   </style>
 </head>
 <body class="font-body-md text-on-background selection:bg-primary-container/30">
 
-  <!-- ══════ CURSOR ══════ -->
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
 
@@ -173,42 +385,86 @@
   </div>
 
   <!-- ══════════════════════════════════════
+       MOBILE MENU OVERLAY
+  ══════════════════════════════════════ -->
+  <div id="mobile-menu">
+    <!-- Decorative propeller hub -->
+    <div class="menu-hub" style="top:calc(50% - 40px);left:calc(50% - 40px);position:absolute;">
+      <div class="menu-hub-blade"></div>
+      <div class="menu-hub-blade"></div>
+      <div class="menu-hub-blade"></div>
+      <div class="menu-hub-blade"></div>
+      <div class="menu-hub-center"></div>
+    </div>
+
+    <nav class="flex flex-col items-center gap-4 relative z-10">
+      <button onclick="mobileNavigate('home')" class="menu-nav-item" data-index="01">Accueil</button>
+      <button onclick="mobileNavigate('projects')" class="menu-nav-item" data-index="02">Projets</button>
+      <button onclick="mobileNavigate('about')" class="menu-nav-item" data-index="03">À Propos</button>
+      <button onclick="mobileNavigate('contact')" class="menu-nav-item" data-index="04">Contact</button>
+    </nav>
+
+    <div class="absolute bottom-8 font-label-caps text-[10px] text-secondary/30 tracking-[.3em]">
+      VORTEX_ID: 0xFA23
+    </div>
+
+    <button onclick="closeMobileMenu()"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex flex-col gap-1 p-3 group"
+      aria-label="Fermer le menu">
+      <!-- X icon using two lines -->
+      <div class="w-6 h-0.5 bg-secondary rotate-45 translate-y-[.45rem] transition-transform"></div>
+      <div class="w-6 h-0.5 bg-secondary -rotate-45 transition-transform"></div>
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
        TOP NAV
   ══════════════════════════════════════ -->
-  <header class="fixed top-0 w-full z-50 flex justify-between items-center px-10 h-20
-                 bg-black/60 backdrop-blur-md border-b border-[#00F5FF]/20
-                 shadow-[0_0_30px_rgba(0,245,255,0.1)]">
+  <header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 sm:px-10 h-16 sm:h-20
+                 bg-black/60 backdrop-blur-md border-b border-[#00FF88]/20
+                 shadow-[0_0_30px_rgba(0,255,136,0.08)]">
+
     <button onclick="navigate('home')"
-            class="text-[#00F5FF] font-black tracking-tighter text-2xl
-                   drop-shadow-[0_0_10px_rgba(0,245,255,0.5)] font-headline-md
-                   hover:scale-105 transition-transform">
+            class="text-[#00FF88] font-black tracking-tighter text-lg sm:text-2xl
+                   drop-shadow-[0_0_10px_rgba(0,255,136,0.5)] font-headline-md
+                   hover:scale-105 transition-transform glow-green">
       PORTFOLIO IS_RAEL
     </button>
 
+    <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8 font-['Epilogue'] uppercase tracking-widest text-xs">
-      <button onclick="navigate('home')"    id="tnav-home"     class="top-nav-btn hover:scale-105 transition-all">ACCUEIL</button>
-      <button onclick="navigate('projects')"id="tnav-projects" class="top-nav-btn hover:scale-105 transition-all">PROJETS</button>
-      <button onclick="navigate('about')"   id="tnav-about"    class="top-nav-btn hover:scale-105 transition-all">À PROPOS</button>
-      <button onclick="navigate('contact')" id="tnav-contact"  class="top-nav-btn hover:scale-105 transition-all">CONTACT</button>
+      <button onclick="navigate('home')"     id="tnav-home"     class="top-nav-btn hover:scale-105 transition-all">ACCUEIL</button>
+      <button onclick="navigate('projects')" id="tnav-projects" class="top-nav-btn hover:scale-105 transition-all">PROJETS</button>
+      <button onclick="navigate('about')"    id="tnav-about"    class="top-nav-btn hover:scale-105 transition-all">À PROPOS</button>
+      <button onclick="navigate('contact')"  id="tnav-contact"  class="top-nav-btn hover:scale-105 transition-all">CONTACT</button>
     </nav>
 
-    <div class="flex items-center gap-6">
-      <button onclick="toggleTerminal()" class="material-symbols-outlined text-[#00F5FF] hover:scale-110 transition-transform">terminal</button>
-      <button onclick="toggleSettings()" class="material-symbols-outlined text-[#00F5FF] hover:scale-110 transition-transform">settings_input_component</button>
+    <div class="flex items-center gap-3 sm:gap-6">
+      <button onclick="toggleTerminal()" class="material-symbols-outlined text-[#00FF88] hover:scale-110 transition-transform text-xl sm:text-2xl">terminal</button>
+      <button onclick="toggleSettings()" class="hidden sm:block material-symbols-outlined text-[#00FF88] hover:scale-110 transition-transform">settings_input_component</button>
+
+      <!-- Propeller burger (mobile only) -->
+      <button id="propeller-btn" onclick="openMobileMenu()" class="md:hidden relative"
+              aria-label="Ouvrir le menu">
+        <div class="blade blade-1"></div>
+        <div class="blade blade-2"></div>
+        <div class="blade blade-3"></div>
+        <div class="blade blade-4"></div>
+        <div class="blade-center"></div>
+      </button>
     </div>
   </header>
 
   <!-- ══════════════════════════════════════
-       SIDE NAV
+       SIDE NAV (desktop)
   ══════════════════════════════════════ -->
-  <aside class="fixed left-0 top-0 h-full flex flex-col justify-center gap-12 px-4 z-40
-                bg-black/40 backdrop-blur-xl border-r border-emerald-900/20
-                shadow-[20px_0_40px_rgba(0,245,255,0.05)]">
-    <div class="absolute top-10 left-4 font-headline-md text-emerald-400 font-bold
+  <aside id="side-nav" class="fixed left-0 top-0 h-full flex-col justify-center gap-12 px-4 z-40
+                bg-black/40 backdrop-blur-xl border-r border-green-900/20
+                shadow-[20px_0_40px_rgba(0,255,136,0.04)] hidden lg:flex">
+    <div class="absolute top-10 left-4 font-headline-md text-green-400 font-bold
                 rotate-[-90deg] origin-left whitespace-nowrap opacity-20 text-sm">
       SYSTEM_MANIFEST
     </div>
-
     <nav class="flex flex-col gap-10">
       <button onclick="navigate('projects')" id="snav-projects"
               class="flex flex-col items-center justify-center transition-all duration-300 nav-inactive">
@@ -226,8 +482,7 @@
         <span class="font-['Epilogue'] font-medium italic text-[10px] mt-2">Contact</span>
       </button>
     </nav>
-
-    <div class="absolute bottom-10 left-4 text-[8px] font-label-caps text-emerald-600 tracking-[0.3em] uppercase">
+    <div class="absolute bottom-10 left-4 text-[8px] font-label-caps text-green-600 tracking-[0.3em] uppercase">
       VORTEX_ID: 0xFA23
     </div>
   </aside>
@@ -235,84 +490,81 @@
   <!-- ══════════════════════════════════════
        MAIN CANVAS
   ══════════════════════════════════════ -->
-  <main class="ml-24 pt-20 min-h-screen relative">
+  <main class="lg:ml-24 pt-16 sm:pt-20 min-h-screen relative">
 
     <!-- ─────────────────────────────────────
          PAGE : ACCUEIL
     ───────────────────────────────────── -->
     <div id="page-home" class="page active">
-      <div style="background:radial-gradient(circle at center,rgba(0,245,255,.05) 0%,transparent 70%)">
+      <div style="background:radial-gradient(circle at center,rgba(0,255,136,.04) 0%,transparent 70%)">
 
         <!-- Hero -->
-        <section class="relative h-screen flex items-center justify-center overflow-hidden px-[5vw]">
-          <!-- Orbits -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-[5vw]">
           <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[120px]"></div>
-            <div id="orbit1" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] border border-[#00F5FF]/10 rounded-full"></div>
-            <div id="orbit2" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border border-secondary/20 rounded-full"></div>
-            <div id="orbit3" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] border border-emerald-900/10 rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-primary-container/4 rounded-full blur-[120px]"></div>
+            <div id="orbit1" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[420px] h-[250px] sm:h-[420px] border border-[#00FF88]/10 rounded-full"></div>
+            <div id="orbit2" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[300px] h-[180px] sm:h-[300px] border border-secondary/15 rounded-full"></div>
+            <div id="orbit3" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] sm:w-[560px] h-[330px] sm:h-[560px] border border-green-900/10 rounded-full"></div>
           </div>
 
-          <div class="relative z-10 text-center max-w-4xl hero-content">
-            <div class="mb-6 inline-block opacity-0 translate-y-4 transition-all duration-700 delay-100" id="hero-label">
-              <span class="font-label-caps text-primary tracking-[0.5em] uppercase px-4 py-2
-                           border border-primary/20 bg-primary/5 backdrop-blur-sm">
+          <div class="relative z-10 text-center max-w-4xl w-full">
+            <div class="mb-4 sm:mb-6 inline-block" id="hero-label">
+              <span class="font-label-caps text-primary tracking-[.3em] sm:tracking-[0.5em] uppercase px-3 sm:px-4 py-2
+                           border border-primary/20 bg-primary/5 backdrop-blur-sm text-[10px] sm:text-xs">
                 INITIATING_SEQUENCE
               </span>
             </div>
 
-            <h1 class="font-headline-xl text-primary leading-none mb-8 glitch opacity-0 translate-y-4 transition-all duration-700 delay-200"
+            <h1 class="font-headline-xl text-primary leading-none mb-6 sm:mb-8 glitch"
                 id="hero-title" data-text="NEXUS — ACCUEIL">
-              NEXUS — <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">ACCUEIL</span>
+              NEXUS — <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00FF88] to-[#39FF14]">ACCUEIL</span>
             </h1>
 
-            <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12 opacity-0 translate-y-4 transition-all duration-700 delay-300"
+            <p class="font-body-md sm:font-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8 sm:mb-12 px-2"
                id="hero-desc">
               L'architecture du vide sculptée par le code. Explorez une dimension
               où le flux cinétique rencontre l'ingénierie logicielle de pointe.
             </p>
 
-            <div class="flex justify-center gap-6 opacity-0 translate-y-4 transition-all duration-700 delay-500" id="hero-btns">
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6" id="hero-btns">
               <button onclick="navigate('projects')"
-                      class="px-8 py-4 border border-primary-container text-primary-container
-                             font-label-caps relative overflow-hidden group hover:bg-primary-container/10 transition-all k-scan">
+                      class="px-6 sm:px-8 py-3 sm:py-4 border border-primary-container text-primary-container
+                             font-label-caps relative overflow-hidden group hover:bg-primary-container/10 transition-all k-scan text-xs">
                 <span class="relative z-10">INITIALIZE_PROTOCOLS</span>
                 <div class="absolute bottom-0 left-0 h-[1px] w-full bg-primary scan-anim"></div>
               </button>
               <button onclick="navigate('about')"
-                      class="px-8 py-4 border border-secondary/40 text-secondary
-                             font-label-caps hover:bg-secondary/5 transition-all k-scan">
+                      class="px-6 sm:px-8 py-3 sm:py-4 border border-secondary/40 text-secondary
+                             font-label-caps hover:bg-secondary/5 transition-all k-scan text-xs">
                 VOIR LE MANIFESTE
               </button>
             </div>
           </div>
 
-          <!-- Scroll indicator -->
-          <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+          <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
             <span class="font-label-caps text-[9px] tracking-[0.4em]">SCROLL</span>
-            <div class="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
+            <div class="w-px h-8 sm:h-12 bg-gradient-to-b from-primary to-transparent"></div>
           </div>
         </section>
 
         <!-- Bento section -->
-        <section class="px-[5vw] space-y-24 my-16">
+        <section class="px-4 sm:px-[5vw] space-y-8 sm:space-y-24 my-8 sm:my-16">
 
           <!-- Row 1 -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-7 group relative aspect-video bg-black/40 backdrop-blur-xl
-                        border border-emerald-900/30 p-8 flex flex-col justify-end overflow-hidden
-                        shadow-[0_0_40px_rgba(0,245,255,0.05)] so1 scroll-reveal">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
+            <div class="md:col-span-7 group relative bg-black/40 backdrop-blur-xl
+                        border border-green-900/30 p-6 sm:p-8 flex flex-col justify-end overflow-hidden
+                        shadow-[0_0_40px_rgba(0,255,136,0.04)] scroll-reveal">
               <div class="absolute top-4 right-4 font-label-caps text-secondary/40 text-[10px]">0x01 // CORE_MODULE</div>
               <div class="absolute inset-0 z-0 opacity-10 group-hover:opacity-30 transition-all duration-700
-                          bg-gradient-to-br from-emerald-900/60 to-transparent"></div>
-              <!-- Animated grid bg -->
-              <div class="absolute inset-0 opacity-5" style="background-image:linear-gradient(rgba(0,245,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.3) 1px,transparent 1px);background-size:40px 40px"></div>
+                          bg-gradient-to-br from-green-900/60 to-transparent"></div>
+              <div class="absolute inset-0 opacity-5" style="background-image:linear-gradient(rgba(0,255,136,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.3) 1px,transparent 1px);background-size:40px 40px"></div>
               <div class="relative z-10">
-                <h2 class="font-headline-lg text-primary mb-4">Systèmes Distribués</h2>
-                <p class="font-body-md text-on-surface-variant max-w-lg">
+                <h2 class="font-headline-lg text-primary mb-3 sm:mb-4">Systèmes Distribués</h2>
+                <p class="font-body-md text-on-surface-variant max-w-lg text-sm sm:text-base">
                   Développement d'architectures résilientes et scalables pour le traitement massif de données en temps réel.
                 </p>
-                <div class="mt-6 flex gap-3 flex-wrap">
+                <div class="mt-4 sm:mt-6 flex gap-2 flex-wrap">
                   <span class="tag-chip">PYTHON</span>
                   <span class="tag-chip">DJANGO</span>
                   <span class="tag-chip">VIBECODING</span>
@@ -321,41 +573,39 @@
               </div>
             </div>
 
-            <div class="md:col-span-5 bg-black/40 backdrop-blur-xl border border-emerald-900/30
-                        p-8 flex flex-col justify-center so2 scroll-reveal">
-              <div class="mb-6 h-12 w-12 border border-[#00F5FF]/40 flex items-center justify-center text-[#00F5FF] float-anim">
+            <div class="md:col-span-5 bg-black/40 backdrop-blur-xl border border-green-900/30
+                        p-6 sm:p-8 flex flex-col justify-center scroll-reveal">
+              <div class="mb-4 sm:mb-6 h-10 sm:h-12 w-10 sm:w-12 border border-[#00FF88]/40 flex items-center justify-center text-[#00FF88] float-anim">
                 <span class="material-symbols-outlined">query_stats</span>
               </div>
-              <h3 class="font-headline-md text-primary mb-4">Analyse de Flux</h3>
-              <p class="font-body-md text-on-surface-variant">
+              <h3 class="font-headline-md text-primary mb-3 sm:mb-4">Analyse de Flux</h3>
+              <p class="font-body-md text-on-surface-variant text-sm sm:text-base">
                 Visualisation cinétique des données complexes pour une prise de décision instantanée.
               </p>
-              <hr class="my-8 border-emerald-900/20"/>
-              <div class="space-y-4" id="home-stats">
-                <!-- Stats injected by JS -->
-              </div>
+              <hr class="my-6 sm:my-8 border-green-900/20"/>
+              <div class="space-y-4" id="home-stats"></div>
             </div>
           </div>
 
           <!-- Row 2 -->
-          <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-4 bg-black/40 backdrop-blur-xl border border-emerald-900/30
-                        p-8 flex flex-col justify-between so3 scroll-reveal">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
+            <div class="md:col-span-4 bg-black/40 backdrop-blur-xl border border-green-900/30
+                        p-6 sm:p-8 flex flex-col justify-between scroll-reveal">
               <div>
                 <span class="font-label-caps text-secondary text-[10px] mb-4 block"></span>
                 <h3 class="font-headline-md text-primary"></h3>
               </div>
-              <div class="p-4 bg-black/60 rounded-lg border border-emerald-900/20 font-mono text-xs text-primary overflow-hidden"
+              <div class="p-3 sm:p-4 bg-black/60 rounded-lg border border-green-900/20 font-mono text-xs text-primary overflow-hidden break-all"
                    id="hex-display">0x4F 0x22 0xAB 0xFF ...</div>
             </div>
 
-            <div class="md:col-span-8 group relative aspect-[21/9] bg-black/40 backdrop-blur-xl
-                        border border-emerald-900/30 p-8 overflow-hidden so2 scroll-reveal">
+            <div class="md:col-span-8 group relative bg-black/40 backdrop-blur-xl
+                        border border-green-900/30 p-6 sm:p-8 overflow-hidden scroll-reveal min-h-[160px]">
               <div class="absolute inset-0 opacity-5"
-                   style="background-image:radial-gradient(circle,rgba(0,245,255,.5) 1px,transparent 1px);background-size:30px 30px"></div>
+                   style="background-image:radial-gradient(circle,rgba(0,255,136,.5) 1px,transparent 1px);background-size:30px 30px"></div>
               <div class="relative z-10 flex flex-col h-full justify-end">
                 <h2 class="font-headline-lg text-primary">Infrastructures Globales</h2>
-                <p class="font-body-md text-on-surface-variant max-w-xl">
+                <p class="font-body-md text-on-surface-variant max-w-xl text-sm sm:text-base">
                   Maillage réseau à faible latence optimisé pour le transfert de données transcontinental.
                 </p>
               </div>
@@ -364,17 +614,17 @@
         </section>
 
         <!-- CTA -->
-        <section class="my-16 flex flex-col items-center justify-center text-center px-[5vw] py-32 bg-black/20">
-          <div class="relative">
-            <div class="absolute -inset-20 bg-primary/5 blur-[100px] rounded-full"></div>
-            <h2 class="relative z-10 font-headline-xl text-primary mb-12">PRÊT POUR L'INITIALISATION ?</h2>
-            <div class="relative z-10 flex flex-wrap justify-center gap-6">
+        <section class="my-8 sm:my-16 flex flex-col items-center justify-center text-center px-4 sm:px-[5vw] py-16 sm:py-32 bg-black/20">
+          <div class="relative w-full max-w-2xl">
+            <div class="absolute -inset-10 sm:-inset-20 bg-primary/4 blur-[100px] rounded-full"></div>
+            <h2 class="relative z-10 font-headline-xl text-primary mb-8 sm:mb-12">PRÊT POUR L'INITIALISATION ?</h2>
+            <div class="relative z-10 flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6">
               <button onclick="navigate('contact')"
-                      class="px-10 py-5 bg-primary text-on-primary font-label-caps tracking-widest hover:bg-white transition-colors">
+                      class="px-8 py-4 bg-primary text-on-primary font-label-caps tracking-widest hover:bg-white transition-colors text-xs sm:text-sm">
                 OUVRIR LE TERMINAL
               </button>
               <button onclick="navigate('about')"
-                      class="px-10 py-5 border border-primary/40 text-primary font-label-caps tracking-widest hover:bg-primary/5 transition-all">
+                      class="px-8 py-4 border border-primary/40 text-primary font-label-caps tracking-widest hover:bg-primary/5 transition-all text-xs sm:text-sm">
                 VOIR LE MANIFESTE
               </button>
             </div>
@@ -388,40 +638,31 @@
          PAGE : PROJETS
     ───────────────────────────────────── -->
     <div id="page-projects" class="page">
-      <div class="px-[5vw] pt-12 pb-20">
+      <div class="px-4 sm:px-[5vw] pt-8 sm:pt-12 pb-16 sm:pb-20">
 
-        <header class="mb-20 max-w-4xl">
-          <h1 class="font-headline-xl text-primary drop-shadow-[0_0_15px_rgba(0,245,255,0.3)]">
+        <header class="mb-10 sm:mb-20 max-w-4xl">
+          <h1 class="font-headline-xl text-primary drop-shadow-[0_0_15px_rgba(0,255,136,0.3)]">
             Vortex des Projets
           </h1>
-          <p class="font-body-lg text-on-surface-variant mt-4 max-w-2xl">
+          <p class="font-body-md sm:font-body-lg text-on-surface-variant mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base">
             Extraction des segments de données critiques. Chaque bloc représente
             une anomalie architecturale résolue dans le vide binaire.
           </p>
-          <div class="h-px w-32 bg-primary-container mt-8 shadow-[0_0_10px_#00F5FF]"></div>
+          <div class="h-px w-32 bg-primary-container mt-6 sm:mt-8 shadow-[0_0_10px_#00FF88]"></div>
         </header>
 
-        <!-- Filter tabs -->
-        <div class="flex gap-3 mb-12 flex-wrap" id="filter-bar">
+        <div class="flex gap-2 sm:gap-3 mb-8 sm:mb-12 flex-wrap" id="filter-bar">
           <button onclick="filterProjects('all')" data-filter="all"
-                  class="filter-btn active-filter font-label-caps text-[10px] px-4 py-2 border">
-            TOUS
-          </button>
+                  class="filter-btn active-filter font-label-caps text-[10px] px-3 sm:px-4 py-2 border">TOUS</button>
           <button onclick="filterProjects('web')" data-filter="web"
-                  class="filter-btn font-label-caps text-[10px] px-4 py-2 border border-emerald-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">
-            WEB
-          </button>
+                  class="filter-btn font-label-caps text-[10px] px-3 sm:px-4 py-2 border border-green-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">WEB</button>
           <button onclick="filterProjects('mobile')" data-filter="mobile"
-                  class="filter-btn font-label-caps text-[10px] px-4 py-2 border border-emerald-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">
-            MOBILE
-          </button>
+                  class="filter-btn font-label-caps text-[10px] px-3 sm:px-4 py-2 border border-green-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">MOBILE</button>
           <button onclick="filterProjects('backend')" data-filter="backend"
-                  class="filter-btn font-label-caps text-[10px] px-4 py-2 border border-emerald-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">
-            BACKEND
-          </button>
+                  class="filter-btn font-label-caps text-[10px] px-3 sm:px-4 py-2 border border-green-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all">BACKEND</button>
         </div>
 
-        <div id="projects-grid" class="flex flex-col gap-16"></div>
+        <div id="projects-grid" class="flex flex-col gap-8 sm:gap-16"></div>
       </div>
     </div>
 
@@ -429,54 +670,51 @@
          PAGE : À PROPOS
     ───────────────────────────────────── -->
     <div id="page-about" class="page">
-      <div class="vortex-grid px-12 pt-12 pb-24 relative min-h-screen"
-           style="background-image:radial-gradient(circle at 50% 50%,#00f5ff05 0%,transparent 80%)">
-        <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#00f5ff] to-transparent
+      <div class="px-4 sm:px-8 lg:px-12 pt-8 sm:pt-12 pb-16 sm:pb-24 relative min-h-screen"
+           style="background-image:radial-gradient(circle at 50% 50%,#00ff8804 0%,transparent 80%)">
+        <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#00FF88] to-transparent
                     absolute top-0 left-0 opacity-30 animate-pulse"></div>
 
-        <section class="mb-20 max-w-5xl mx-auto">
+        <section class="mb-10 sm:mb-20 max-w-5xl mx-auto">
           <div class="flex items-center gap-4 mb-2">
-            <span class="h-px w-12 bg-primary"></span>
-            <span class="font-label-caps text-primary uppercase tracking-[0.5em]">System_Report // Terminal — Manifeste</span>
+            <span class="h-px w-8 sm:w-12 bg-primary"></span>
+            <span class="font-label-caps text-primary uppercase tracking-[.2em] sm:tracking-[0.5em] text-[9px] sm:text-xs">System_Report // Manifeste</span>
           </div>
-          <h1 class="font-headline-xl text-primary mb-6 drop-shadow-[0_0_20px_rgba(0,245,255,0.3)] uppercase">
+          <h1 class="font-headline-xl text-primary mb-4 sm:mb-6 drop-shadow-[0_0_20px_rgba(0,255,136,0.3)] uppercase">
             Architecte du Vide.
           </h1>
-          <p class="font-body-lg text-on-surface-variant max-w-2xl border-l-2 border-primary/30 pl-8 italic">
+          <p class="font-body-md text-on-surface-variant max-w-2xl border-l-2 border-primary/30 pl-6 sm:pl-8 italic text-sm sm:text-base">
             Extraction des données biographiques en cours...
-            Analyse de la structure logique de l'entité : Développeur Junior avec une affinité pour les systèmes distribués et les applications mobiles.,
+            Analyse de la structure logique de l'entité : Développeur Junior avec une affinité pour les systèmes distribués et les applications mobiles,
             passionné par les architectures complexes et le design cinétique.
           </p>
         </section>
 
-        <div class="grid grid-cols-12 gap-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 max-w-7xl mx-auto">
 
           <!-- Identity -->
-          <div class="col-span-12 lg:col-span-7 glass-panel p-8 spiral-card relative overflow-hidden group">
-            <div class="absolute top-4 right-6 font-label-caps text-primary/40 text-[10px]">METADATA: IDENTITY_V4.0</div>
-            <div class="flex items-start gap-8">
-              <div class="relative w-40 h-52 overflow-hidden border border-primary/20 bg-surface-container-low
-                          group-hover:border-primary/60 transition-colors flex-shrink-0
-                          flex items-center justify-center">
-                <span class="material-symbols-outlined text-6xl text-primary/20">person</span>
+          <div class="sm:col-span-12 lg:col-span-7 glass-panel p-6 sm:p-8 spiral-card relative overflow-hidden group">
+            <div class="absolute top-4 right-4 sm:right-6 font-label-caps text-primary/40 text-[9px]">METADATA: IDENTITY_V4.0</div>
+            <div class="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
+              <div class="relative w-full sm:w-40 h-36 sm:h-52 overflow-hidden border border-primary/20 bg-surface-container-low
+                          flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-5xl sm:text-6xl text-primary/20">person</span>
                 <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                     style="background:linear-gradient(135deg,rgba(0,245,255,.05),transparent)"></div>
               </div>
               <div class="flex-1">
-                <h3 class="font-headline-md text-primary mb-4">Initialisation_du_Profil</h3>
-                <div class="space-y-4 font-body-md text-on-surface-variant">
+                <h3 class="font-headline-md text-primary mb-3 sm:mb-4">Initialisation_du_Profil</h3>
+                <div class="space-y-3 sm:space-y-4 font-body-md text-on-surface-variant text-sm sm:text-base">
                   <p>Je conçois des systèmes numériques qui transcendent le simple code.
                      Mon approche est celle d'un architecte : chaque ligne est une pierre
                      angulaire, chaque algorithme un pilier structurel.</p>
-                  <div class="grid grid-cols-2 gap-4 pt-4">
-                    <div class="bg-surface-container-low p-3 border-l-2 border-primary">
+                  <div class="grid grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4">
+                    <div class="bg-surface-container-low p-2 sm:p-3 border-l-2 border-primary">
                       <div class="text-[10px] text-primary/50 uppercase">Spécialité</div>
-                      <div class="text-sm font-bold text-primary">Full-Stack & Mobile</div>
+                      <div class="text-xs sm:text-sm font-bold text-primary">Full-Stack & Mobile</div>
                     </div>
-                    <div class="bg-surface-container-low p-3 border-l-2 border-secondary">
+                    <div class="bg-surface-container-low p-2 sm:p-3 border-l-2 border-secondary">
                       <div class="text-[10px] text-secondary/50 uppercase">Statut</div>
-                      <div class="text-sm font-bold text-secondary">Actif_01</div>
+                      <div class="text-xs sm:text-sm font-bold text-secondary">Actif_01</div>
                     </div>
                   </div>
                 </div>
@@ -485,24 +723,24 @@
           </div>
 
           <!-- Skills -->
-          <div class="col-span-12 lg:col-span-5 glass-panel p-8 spiral-card flex flex-col relative">
-            <div class="absolute top-4 right-6 font-label-caps text-secondary/40 text-[10px]">SYS.SCAN: CAPABILITIES</div>
-            <h3 class="font-headline-md text-secondary mb-6">Stack_Technologique</h3>
-            <div class="flex flex-wrap gap-2 mb-8" id="skills-cloud"></div>
+          <div class="sm:col-span-12 lg:col-span-5 glass-panel p-6 sm:p-8 spiral-card flex flex-col relative">
+            <div class="absolute top-4 right-4 sm:right-6 font-label-caps text-secondary/40 text-[9px]">SYS.SCAN: CAPABILITIES</div>
+            <h3 class="font-headline-md text-secondary mb-4 sm:mb-6">Stack_Technologique</h3>
+            <div class="flex flex-wrap gap-2 mb-6 sm:mb-8" id="skills-cloud"></div>
             <div class="mt-auto space-y-3" id="skill-bars"></div>
           </div>
 
           <!-- Timeline -->
-          <div class="col-span-12 lg:col-span-4 glass-panel p-6 spiral-card border-l-4 border-primary">
-            <div class="flex items-center gap-2 mb-6">
-              <span class="material-symbols-outlined text-primary">history</span>
-              <h4 class="font-headline-md text-primary text-lg uppercase tracking-tight">Timeline_Logs</h4>
+          <div class="sm:col-span-12 lg:col-span-4 glass-panel p-5 sm:p-6 spiral-card border-l-4 border-primary">
+            <div class="flex items-center gap-2 mb-4 sm:mb-6">
+              <span class="material-symbols-outlined text-primary text-lg sm:text-xl">history</span>
+              <h4 class="font-headline-md text-primary text-base sm:text-lg uppercase tracking-tight">Timeline_Logs</h4>
             </div>
-            <div class="space-y-6" id="timeline"></div>
+            <div class="space-y-4 sm:space-y-6" id="timeline"></div>
           </div>
 
           <!-- Terminal -->
-          <div class="col-span-12 lg:col-span-8 bg-black/80 border border-emerald-900/30 spiral-card relative overflow-hidden">
+          <div class="sm:col-span-12 lg:col-span-8 bg-black/80 border border-green-900/30 spiral-card relative overflow-hidden">
             <div class="bg-surface-container-highest px-4 py-2 flex items-center gap-2">
               <div class="flex gap-1.5">
                 <div class="w-2.5 h-2.5 rounded-full bg-red-500/40"></div>
@@ -511,11 +749,11 @@
               </div>
               <span class="text-[10px] font-label-caps text-on-surface-variant/50 ml-4">manifest_renderer.py</span>
             </div>
-            <div class="p-6 font-mono text-sm overflow-x-auto">
-<pre id="code-display" class="text-secondary-fixed text-sm leading-relaxed"></pre>
+            <div class="p-4 sm:p-6 font-mono text-xs sm:text-sm overflow-x-auto">
+              <pre id="code-display" class="text-secondary-fixed leading-relaxed whitespace-pre"></pre>
             </div>
             <button onclick="navigate('contact')"
-                    class="absolute bottom-4 right-4 border border-primary/50 px-6 py-2 text-[10px]
+                    class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 border border-primary/50 px-4 sm:px-6 py-2 text-[10px]
                            font-label-caps text-primary hover:bg-primary hover:text-on-primary
                            transition-all uppercase flex items-center gap-2 group/btn k-scan">
               Initialiser_Protocole
@@ -531,45 +769,43 @@
          PAGE : CONTACT
     ───────────────────────────────────── -->
     <div id="page-contact" class="page">
-      <div class="min-h-screen pt-12 pb-20 px-[5vw]">
+      <div class="min-h-screen pt-8 sm:pt-12 pb-16 sm:pb-20 px-4 sm:px-[5vw]">
 
-        <section class="relative mb-16 max-w-5xl mx-auto">
-          <div class="absolute -top-20 -left-20 w-64 h-64 bg-[#00F5FF]/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <section class="relative mb-10 sm:mb-16 max-w-5xl mx-auto">
+          <div class="absolute -top-20 -left-20 w-64 h-64 bg-[#00FF88]/8 blur-[100px] rounded-full pointer-events-none"></div>
           <div class="relative z-10">
-            <span class="font-label-caps text-primary uppercase tracking-[0.3em] mb-4 block">Initialisation du protocole</span>
-            <h1 class="font-headline-xl text-primary mb-8 leading-none">
-              Liaison — <span class="text-secondary drop-shadow-[0_0_15px_rgba(148,211,193,0.3)] italic">Contact</span>
+            <span class="font-label-caps text-primary uppercase tracking-[.2em] sm:tracking-[0.3em] mb-3 sm:mb-4 block text-[10px] sm:text-xs">Initialisation du protocole</span>
+            <h1 class="font-headline-xl text-primary mb-5 sm:mb-8 leading-none">
+              Liaison — <span class="text-secondary drop-shadow-[0_0_15px_rgba(57,255,20,0.3)] italic">Contact</span>
             </h1>
-            <p class="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+            <p class="font-body-md text-on-surface-variant max-w-2xl leading-relaxed text-sm sm:text-base">
               Établissez une connexion sécurisée avec l'architecte.
               Prêt à matérialiser vos visions numériques dans le vide créatif ?
             </p>
           </div>
         </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 max-w-6xl mx-auto items-start">
 
           <!-- Form -->
-          <div class="lg:col-span-7 glass p-10 relative overflow-hidden group">
-            <div class="absolute top-0 right-0 p-4 font-label-caps text-[10px] text-primary/30">ID: COMMS_SECURE_v2.4</div>
+          <div class="lg:col-span-7 glass p-6 sm:p-10 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-3 font-label-caps text-[10px] text-primary/30">ID: COMMS_SECURE_v2.4</div>
 
-            <h3 class="font-headline-md text-primary mb-8 flex items-center gap-3">
+            <h3 class="font-headline-md text-primary mb-6 sm:mb-8 flex items-center gap-3">
               <span class="material-symbols-outlined text-secondary">sensors</span>
               Opening a Channel
             </h3>
 
-            <!-- Flash message -->
-            <div id="form-feedback" class="hidden mb-6 px-4 py-3 border text-sm font-label-caps"></div>
+            <div id="form-feedback" class="hidden mb-4 sm:mb-6 px-4 py-3 border text-sm font-label-caps"></div>
 
-            <form id="contact-form" class="space-y-8" novalidate>
+            <form id="contact-form" class="space-y-6 sm:space-y-8" novalidate>
               <div class="relative group/f">
                 <label class="font-label-caps text-secondary/70 text-[10px] uppercase mb-2 block tracking-widest">Identifiant_Emetteur</label>
                 <input type="text" name="name" placeholder="NOM OU ENTITÉ"
                        class="w-full bg-surface-container-lowest border-b border-secondary/30
                               focus:border-primary-container outline-none py-3 px-2
-                              text-primary font-body-md transition-all"/>
-                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container
-                            group-focus-within/f:w-full transition-all duration-500"></div>
+                              text-primary font-body-md transition-all text-sm sm:text-base"/>
+                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container group-focus-within/f:w-full transition-all duration-500"></div>
               </div>
 
               <div class="relative group/f">
@@ -577,9 +813,8 @@
                 <input type="email" name="email" placeholder="EMAIL_ADRESSE"
                        class="w-full bg-surface-container-lowest border-b border-secondary/30
                               focus:border-primary-container outline-none py-3 px-2
-                              text-primary font-body-md transition-all"/>
-                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container
-                            group-focus-within/f:w-full transition-all duration-500"></div>
+                              text-primary font-body-md transition-all text-sm sm:text-base"/>
+                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container group-focus-within/f:w-full transition-all duration-500"></div>
               </div>
 
               <div class="relative group/f">
@@ -587,9 +822,8 @@
                 <input type="text" name="subject" placeholder="SUJET_TRANSMISSION"
                        class="w-full bg-surface-container-lowest border-b border-secondary/30
                               focus:border-primary-container outline-none py-3 px-2
-                              text-primary font-body-md transition-all"/>
-                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container
-                            group-focus-within/f:w-full transition-all duration-500"></div>
+                              text-primary font-body-md transition-all text-sm sm:text-base"/>
+                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container group-focus-within/f:w-full transition-all duration-500"></div>
               </div>
 
               <div class="relative group/f">
@@ -597,40 +831,38 @@
                 <textarea name="message" rows="5" placeholder="MESSAGE_ENCRYPTÉ"
                           class="w-full bg-surface-container-lowest border-b border-secondary/30
                                  focus:border-primary-container outline-none py-3 px-2
-                                 text-primary font-body-md transition-all resize-none"></textarea>
-                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container
-                            group-focus-within/f:w-full transition-all duration-500"></div>
+                                 text-primary font-body-md transition-all resize-none text-sm sm:text-base"></textarea>
+                <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-primary-container group-focus-within/f:w-full transition-all duration-500"></div>
               </div>
 
               <button type="submit"
-                      class="w-full kinetic-border py-4 px-8 relative overflow-hidden
+                      class="w-full kinetic-border py-3 sm:py-4 px-6 sm:px-8 relative overflow-hidden
                              flex items-center justify-center gap-4 hover:scale-[1.02]
                              transition-transform group/btn k-scan">
-                <span class="font-label-caps text-primary tracking-[0.2em]" id="submit-label">INITIER_TRANSFERT</span>
+                <span class="font-label-caps text-primary tracking-[0.2em] text-xs sm:text-sm" id="submit-label">INITIER_TRANSFERT</span>
                 <span class="material-symbols-outlined text-primary group-hover/btn:translate-x-2 transition-transform">send</span>
               </button>
             </form>
           </div>
 
           <!-- Sidebar -->
-          <div class="lg:col-span-5 space-y-8">
-            <div class="glass p-8 border-l-4 border-primary-container relative">
-              <div class="absolute -top-4 -right-4 w-24 h-24 bg-secondary/5 blur-2xl"></div>
-              <h4 class="font-label-caps text-primary-container mb-6 text-sm flex items-center gap-2">
+          <div class="lg:col-span-5 space-y-6 sm:space-y-8">
+            <div class="glass p-6 sm:p-8 border-l-4 border-primary-container relative">
+              <h4 class="font-label-caps text-primary-container mb-4 sm:mb-6 text-xs sm:text-sm flex items-center gap-2">
                 <span class="material-symbols-outlined text-sm">hub</span>STATUS_SYSTÈME
               </h4>
-              <div class="space-y-4 font-body-md text-on-surface/80">
+              <div class="space-y-3 sm:space-y-4 font-body-md text-on-surface/80">
                 <div class="flex justify-between items-center border-b border-white/5 pb-2">
                   <span class="text-xs uppercase opacity-50">Localisation</span>
-                  <span class="text-secondary">Abidjan, CI</span>
+                  <span class="text-secondary text-sm">Abidjan, CI</span>
                 </div>
                 <div class="flex justify-between items-center border-b border-white/5 pb-2">
                   <span class="text-xs uppercase opacity-50">Temps_Réponse</span>
-                  <span class="text-secondary">&lt; 24 Cycles</span>
+                  <span class="text-secondary text-sm">&lt; 24 Cycles</span>
                 </div>
                 <div class="flex justify-between items-center border-b border-white/5 pb-2">
                   <span class="text-xs uppercase opacity-50">Disponibilité</span>
-                  <span class="text-secondary flex items-center gap-2">
+                  <span class="text-secondary flex items-center gap-2 text-sm">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#4ade80] inline-block pulse-dot"></span>
                     Opérationnel
                   </span>
@@ -638,21 +870,20 @@
               </div>
             </div>
 
-            <!-- Social links -->
-            <div class="flex gap-4">
-              <a href="#" class="flex-1 glass p-4 flex flex-col items-center justify-center gap-2
-                                  hover:bg-[#00F5FF]/5 transition-colors group">
-                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-2xl">terminal</span>
+            <div class="flex gap-3 sm:gap-4">
+              <a href="#" class="flex-1 glass p-3 sm:p-4 flex flex-col items-center justify-center gap-1 sm:gap-2
+                                  hover:bg-[#00FF88]/5 transition-colors group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-xl sm:text-2xl">terminal</span>
                 <span class="text-[10px] font-label-caps">GITHUB</span>
               </a>
-              <a href="#" class="flex-1 glass p-4 flex flex-col items-center justify-center gap-2
-                                  hover:bg-[#00F5FF]/5 transition-colors group">
-                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-2xl">link</span>
+              <a href="#" class="flex-1 glass p-3 sm:p-4 flex flex-col items-center justify-center gap-1 sm:gap-2
+                                  hover:bg-[#00FF88]/5 transition-colors group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-xl sm:text-2xl">link</span>
                 <span class="text-[10px] font-label-caps">LINKEDIN</span>
               </a>
-              <a href="#" class="flex-1 glass p-4 flex flex-col items-center justify-center gap-2
-                                  hover:bg-[#00F5FF]/5 transition-colors group">
-                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-2xl">code</span>
+              <a href="#" class="flex-1 glass p-3 sm:p-4 flex flex-col items-center justify-center gap-1 sm:gap-2
+                                  hover:bg-[#00FF88]/5 transition-colors group">
+                <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-xl sm:text-2xl">code</span>
                 <span class="text-[10px] font-label-caps">SOURCE</span>
               </a>
             </div>
@@ -666,14 +897,14 @@
   <!-- ══════════════════════════════════════
        FOOTER
   ══════════════════════════════════════ -->
-  <footer class="ml-24 flex justify-between items-end w-full px-12 pb-8 bg-transparent">
-    <div class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-emerald-500">
+  <footer class="lg:ml-24 flex flex-col sm:flex-row justify-between items-center sm:items-end w-full px-4 sm:px-12 py-6 sm:pb-8 bg-transparent gap-3 sm:gap-0">
+    <div class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-green-500">
       © 2025 PORTFOLIO IS_RAEL // BEN-DEV
     </div>
-    <div class="flex gap-8">
-      <a href="#" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-emerald-900 hover:text-emerald-300 transition-colors uppercase">SOURCE_CODE</a>
-      <a href="#" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-emerald-900 hover:text-emerald-300 transition-colors uppercase">CORE_LOGS</a>
-      <button onclick="navigate('contact')" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-emerald-900 hover:text-emerald-300 transition-colors uppercase">ENCRYPTED_COMMS</button>
+    <div class="flex gap-4 sm:gap-8">
+      <a href="#" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-green-900 hover:text-green-300 transition-colors uppercase">SOURCE_CODE</a>
+      <a href="#" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-green-900 hover:text-green-300 transition-colors uppercase">CORE_LOGS</a>
+      <button onclick="navigate('contact')" class="font-['Epilogue'] text-[10px] tracking-widest font-light opacity-50 text-green-900 hover:text-green-300 transition-colors uppercase">ENCRYPTED_COMMS</button>
     </div>
   </footer>
 
@@ -681,11 +912,11 @@
        TERMINAL OVERLAY
   ══════════════════════════════════════ -->
   <div id="terminal-overlay"
-       class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl hidden flex-col p-8 scanline"
+       class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl hidden flex-col p-4 sm:p-8 scanline"
        style="font-family:monospace">
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex justify-between items-center mb-4 sm:mb-6">
       <div class="flex items-center gap-3">
-        <span class="text-[#00F5FF] text-lg font-bold">VOID_TERMINAL</span>
+        <span class="text-[#00FF88] text-base sm:text-lg font-bold">VOID_TERMINAL</span>
         <span class="text-[10px] font-label-caps text-secondary/50">v2.4.1</span>
       </div>
       <button onclick="toggleTerminal()" class="text-primary hover:text-white transition-colors font-label-caps text-[10px]">
@@ -693,20 +924,19 @@
       </button>
     </div>
     <div class="border-t border-primary/10 pt-4 flex-1 overflow-y-auto" id="term-history"></div>
-    <div class="flex items-center gap-3 border-t border-primary/10 pt-4 mt-4">
-      <span class="text-[#00F5FF] text-sm">void@architect:~$</span>
-      <input id="term-input" type="text" placeholder="Tapez 'help' pour les commandes..."
-             class="flex-1 bg-transparent outline-none text-primary text-sm font-mono"
+    <div class="flex items-center gap-2 sm:gap-3 border-t border-primary/10 pt-4 mt-4">
+      <span class="text-[#00FF88] text-xs sm:text-sm whitespace-nowrap">void@architect:~$</span>
+      <input id="term-input" type="text" placeholder="Tapez 'help'..."
+             class="flex-1 bg-transparent outline-none text-primary text-xs sm:text-sm font-mono min-w-0"
              onkeydown="handleTerminal(event)"/>
-      <span class="blink-cursor text-[#00F5FF]">█</span>
+      <span class="blink-cursor text-[#00FF88]">█</span>
     </div>
   </div>
 
   <!-- ══════════════════════════════════════
        SETTINGS OVERLAY
   ══════════════════════════════════════ -->
-  <div id="settings-overlay"
-       class="fixed top-24 right-6 z-[200] glass p-6 w-72 hidden">
+  <div id="settings-overlay" class="fixed top-16 sm:top-24 right-2 sm:right-6 z-[200] glass p-5 sm:p-6 w-64 sm:w-72 hidden">
     <h4 class="font-label-caps text-primary text-[10px] mb-4 tracking-widest">PARAMÈTRES_SYSTÈME</h4>
     <div class="space-y-4">
       <div class="flex justify-between items-center">
@@ -731,73 +961,46 @@
         </button>
       </div>
     </div>
-    <div class="mt-4 pt-4 border-t border-emerald-900/20 text-[10px] font-label-caps text-secondary/40 text-center">
+    <div class="mt-4 pt-4 border-t border-green-900/20 text-[10px] font-label-caps text-secondary/40 text-center">
       BUILD: 0xFA23.2025
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       SVG BG DÉCOR
-  ══════════════════════════════════════ -->
+  <!-- SVG BG -->
   <div class="fixed inset-0 pointer-events-none -z-10 opacity-10">
     <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 1000">
-      <path d="M1000,0 Q500,500 0,1000" fill="transparent" stroke="#00F5FF" stroke-width="0.5"/>
-      <path d="M0,0 Q500,500 1000,1000" fill="transparent" stroke="#0b5345" stroke-width="0.5"/>
+      <path d="M1000,0 Q500,500 0,1000" fill="transparent" stroke="#00FF88" stroke-width="0.5"/>
+      <path d="M0,0 Q500,500 1000,1000" fill="transparent" stroke="#0a4020" stroke-width="0.5"/>
     </svg>
   </div>
 
-  <!-- Particles canvas -->
   <canvas id="particles-canvas" class="fixed inset-0 -z-10 pointer-events-none opacity-30"></canvas>
-
-  <style>
-    .tag-chip { padding:.25rem .75rem;background:rgba(148,211,193,.1);border:1px solid rgba(148,211,193,.2);color:#94d3c1;font-size:.625rem;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase; }
-    .active-filter { border-color:rgba(0,245,255,.4)!important;color:#e9feff!important;background:rgba(0,245,255,.05)!important; }
-    .top-nav-btn { color:#064040;opacity:.7; }
-    .top-nav-btn.active { color:#00F5FF;font-weight:700;opacity:1; }
-    .scroll-reveal { opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s; }
-    .scroll-reveal.revealed { opacity:1;transform:translateY(0) !important; }
-  </style>
 
   <!-- ══════════════════════════════════════
        JAVASCRIPT
   ══════════════════════════════════════ -->
   <script>
-  // ════════════════════════════════════
-  //  DATA
-  // ════════════════════════════════════
   const DATA = {
     projects: [
-      {
-        id:1, title:"Noyau de Synchronisation", hex:"0x882A",
+      { id:1, title:"Noyau de Synchronisation", hex:"0x882A",
         desc:"Orchestrateur d'architectures distribuées utilisant des protocoles de flux asynchrones. Optimisation des latences de 40%.",
-        tags:["Python","Django","REST","Docker"], cat:["web","backend"],
-        url:"#", github:"#"
-      },
-      {
-        id:2, title:"Analyseur de Spectre K", hex:"0x4F12",
+        tags:["Python","Django","REST","Docker"], cat:["web","backend"], url:"#", github:"#" },
+      { id:2, title:"Analyseur de Spectre K", hex:"0x4F12",
         desc:"Outil de visualisation de données en temps réel pour l'analyse heuristique des anomalies de réseau chiffré.",
-        tags:["Flutter","Dart","FastAPI"], cat:["mobile","backend"],
-        url:"#", github:"#"
-      },
-      {
-        id:3, title:"Interface Quantique", hex:"0x11B9",
+        tags:["Flutter","Dart","FastAPI"], cat:["mobile","backend"], url:"#", github:"#" },
+      { id:3, title:"Interface Quantique", hex:"0x11B9",
         desc:"Système de gestion d'actifs numériques basé sur la blockchain avec une UI pilotée par le son et la fréquence.",
-        tags:["React","Node.js","Web3"], cat:["web"],
-        url:"#", github:"#"
-      },
-      {
-        id:4, title:"MyMeteo — API Météo", hex:"0x2C4D",
+        tags:["React","Node.js","Web3"], cat:["web"], url:"#", github:"#" },
+      { id:4, title:"MyMeteo — API Météo", hex:"0x2C4D",
         desc:"Application Django intégrant l'API OpenWeatherMap avec interface Tailwind et gestion sécurisée des clés via .env.",
-        tags:["Python","Django","Tailwind","API"], cat:["web","backend"],
-        url:"#", github:"#"
-      },
+        tags:["Python","Django","Tailwind","API"], cat:["web","backend"], url:"#", github:"#" },
     ],
     skills: ["Python","Django","Flutter","Dart","FastAPI","TailwindCSS","Docker","Git","PostgreSQL","REST","SQLite","Linux"],
     skillBars: [
-      { label:"BACKEND_FLUX",     pct:88, color:"#e9feff", shadow:"#00f5ff" },
-      { label:"MOBILE_FLUTTER",   pct:80, color:"#94d3c1", shadow:"#94d3c1" },
-      { label:"INTERFACE_DESIGN", pct:75, color:"#00dce5", shadow:"#00dce5" },
-      { label:"API_INTEGRATION",  pct:85, color:"#63f7ff", shadow:"#63f7ff" },
+      { label:"BACKEND_FLUX",     pct:88, color:"#00FF88", shadow:"#00FF88" },
+      { label:"MOBILE_FLUTTER",   pct:80, color:"#39FF14", shadow:"#39FF14" },
+      { label:"INTERFACE_DESIGN", pct:75, color:"#a0ffb8", shadow:"#a0ffb8" },
+      { label:"API_INTEGRATION",  pct:85, color:"#ccffe8", shadow:"#ccffe8" },
     ],
     timeline: [
       { period:"2024 — PRÉSENT", title:"Développeur Full-Stack", company:"Projets personnels & Freelance" },
@@ -821,55 +1024,72 @@
     ]
   };
 
-  // ════════════════════════════════════
-  //  NAVIGATION
-  // ════════════════════════════════════
+  // ── NAVIGATION ──
   let currentPage = "home";
 
   function navigate(page) {
     document.getElementById("page-" + currentPage).classList.remove("active");
     document.getElementById("page-" + page).classList.add("active");
     currentPage = page;
-
-    // Top nav highlight
     document.querySelectorAll(".top-nav-btn").forEach(b => b.classList.remove("active"));
     const tnav = document.getElementById("tnav-" + page);
     if(tnav) tnav.classList.add("active");
-
-    // Side nav highlight
     ["projects","about","contact"].forEach(p => {
       const btn = document.getElementById("snav-" + p);
       if(!btn) return;
       btn.className = "flex flex-col items-center justify-center transition-all duration-300 " +
         (p === page ? "nav-active" : "nav-inactive");
     });
-
     window.scrollTo({top:0,behavior:"smooth"});
-    if(page==="about") initAbout();
+    if(page==="about")    initAbout();
     if(page==="projects") renderProjects("all");
-    if(page==="home") initHero();
+    if(page==="home")     initHero();
     closeSettings();
   }
 
-  // ════════════════════════════════════
-  //  HOME INIT
-  // ════════════════════════════════════
+  // ── MOBILE MENU ──
+  function openMobileMenu() {
+    const btn = document.getElementById("propeller-btn");
+    const menu = document.getElementById("mobile-menu");
+    btn.classList.add("open","spinning");
+    setTimeout(() => btn.classList.remove("spinning"), 600);
+    menu.classList.add("open");
+    document.body.style.overflow = "hidden";
+
+    // Animate items in
+    menu.querySelectorAll(".menu-nav-item").forEach((el, i) => {
+      el.style.animationDelay = (i * 80 + 100) + "ms";
+      el.classList.add("anim-in");
+    });
+  }
+
+  function closeMobileMenu() {
+    const btn = document.getElementById("propeller-btn");
+    const menu = document.getElementById("mobile-menu");
+    btn.classList.remove("open");
+    menu.classList.remove("open");
+    document.body.style.overflow = "";
+    menu.querySelectorAll(".menu-nav-item").forEach(el => el.classList.remove("anim-in"));
+  }
+
+  function mobileNavigate(page) {
+    closeMobileMenu();
+    setTimeout(() => navigate(page), 300);
+  }
+
+  // ── HOME INIT ──
   function initHero() {
-    // Animate hero elements
     const els = ["hero-label","hero-title","hero-desc","hero-btns"];
     els.forEach((id,i) => {
       const el = document.getElementById(id);
       if(!el) return;
-      el.style.opacity = "0";
-      el.style.transform = "translateY(1.5rem)";
+      el.style.opacity = "0"; el.style.transform = "translateY(1.5rem)";
       setTimeout(() => {
         el.style.transition = "opacity .7s ease, transform .7s ease";
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
+        el.style.opacity = "1"; el.style.transform = "translateY(0)";
       }, 100 + i * 150);
     });
 
-    // Render stats
     const statsEl = document.getElementById("home-stats");
     if(statsEl) {
       statsEl.innerHTML = DATA.homeStats.map(s => `
@@ -878,13 +1098,12 @@
             <span class="text-secondary/60">${s.label}</span>
             <span class="text-primary">${s.value}</span>
           </div>
-          <div class="w-full bg-emerald-950 h-1">
-            <div class="bg-primary h-full shadow-[0_0_10px_#00F5FF] bar-fill" style="width:${s.pct}%"></div>
+          <div class="w-full bg-green-950 h-1">
+            <div class="bg-primary h-full shadow-[0_0_10px_#00FF88] bar-fill" style="width:${s.pct}%"></div>
           </div>
         </div>`).join("");
     }
 
-    // Hex display randomizer
     const hexEl = document.getElementById("hex-display");
     if(hexEl) {
       setInterval(() => {
@@ -893,10 +1112,7 @@
       }, 800);
     }
 
-    // Orbit animation (manual JS)
     animateOrbits();
-
-    // Scroll reveal
     observeScrollReveal();
   }
 
@@ -909,17 +1125,14 @@
       const o1 = document.getElementById("orbit1");
       const o2 = document.getElementById("orbit2");
       const o3 = document.getElementById("orbit3");
-      if(o1) o1.style.transform = `translate(-50%,-50%) rotate(${t * 30}deg)`;
-      if(o2) o2.style.transform = `translate(-50%,-50%) rotate(${-t * 40}deg)`;
-      if(o3) o3.style.transform = `translate(-50%,-50%) rotate(${t * 15}deg)`;
+      if(o1) o1.style.transform = `translate(-50%,-50%) rotate(${t*30}deg)`;
+      if(o2) o2.style.transform = `translate(-50%,-50%) rotate(${-t*40}deg)`;
+      if(o3) o3.style.transform = `translate(-50%,-50%) rotate(${t*15}deg)`;
       if(currentPage === "home") orbitFrame = requestAnimationFrame(step);
     }
     step();
   }
 
-  // ════════════════════════════════════
-  //  SCROLL REVEAL
-  // ════════════════════════════════════
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("revealed"); });
   }, { threshold: 0.1 });
@@ -928,17 +1141,12 @@
     document.querySelectorAll(".scroll-reveal").forEach(el => revealObserver.observe(el));
   }
 
-  // ════════════════════════════════════
-  //  PROJECTS
-  // ════════════════════════════════════
-  let currentFilter = "all";
-
+  // ── PROJECTS ──
   function filterProjects(cat) {
-    currentFilter = cat;
     document.querySelectorAll(".filter-btn").forEach(b => {
       b.classList.toggle("active-filter", b.dataset.filter === cat);
       if(b.dataset.filter !== cat) {
-        b.className = "filter-btn font-label-caps text-[10px] px-4 py-2 border border-emerald-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all";
+        b.className = "filter-btn font-label-caps text-[10px] px-3 sm:px-4 py-2 border border-green-900/40 text-secondary/60 hover:border-primary/40 hover:text-primary transition-all";
       }
     });
     renderProjects(cat);
@@ -948,67 +1156,55 @@
     const grid = document.getElementById("projects-grid");
     if(!grid) return;
     const list = cat === "all" ? DATA.projects : DATA.projects.filter(p => p.cat.includes(cat));
-
-    grid.innerHTML = list.map((p,i) => {
-      const dirClass = i%2===0 ? "md:flex-row" : "md:flex-row-reverse";
-      const btnJust  = i%2===0 ? "justify-end" : "justify-start";
-      const offset   = ["so1","so2","so3"][i%3];
-      return `
-      <section class="group relative max-w-3xl ${offset} scroll-reveal" style="animation-delay:${i*80}ms">
-        <div class="vortex-border bg-black/40 backdrop-blur-md p-8 relative overflow-hidden">
-          <div class="absolute top-4 right-6 font-label-caps text-secondary opacity-50 text-[10px]">
+    grid.innerHTML = list.map((p,i) => `
+      <section class="group relative scroll-reveal" style="animation-delay:${i*80}ms">
+        <div class="vortex-border bg-black/40 backdrop-blur-md p-5 sm:p-8 relative overflow-hidden">
+          <div class="absolute top-3 right-4 sm:top-4 sm:right-6 font-label-caps text-secondary opacity-50 text-[9px] sm:text-[10px]">
             METADATA :: HEX_${p.hex}
           </div>
-          <div class="flex flex-col ${dirClass} gap-8 items-start">
-            <div class="w-full md:w-1/3 aspect-video overflow-hidden rounded-lg border border-emerald-900/50
-                        bg-black/60 flex items-center justify-center">
-              <span class="material-symbols-outlined text-5xl text-emerald-900/40 group-hover:text-primary/20 transition-colors">
+          <div class="flex flex-col sm:flex-row gap-5 sm:gap-8 items-start">
+            <div class="w-full sm:w-1/3 h-32 sm:aspect-video overflow-hidden border border-green-900/50
+                        bg-black/60 flex items-center justify-center rounded-lg flex-shrink-0">
+              <span class="material-symbols-outlined text-4xl sm:text-5xl text-green-900/40 group-hover:text-primary/20 transition-colors">
                 ${["terminal","hub","code","cloud"][i%4]}
               </span>
             </div>
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-2">
-                <span class="w-2 h-2 bg-[#00F5FF] rounded-full pulse-dot"></span>
+                <span class="w-2 h-2 bg-[#00FF88] rounded-full pulse-dot"></span>
                 <h2 class="font-headline-md text-primary">${p.title}</h2>
               </div>
-              <p class="text-on-surface-variant font-body-md mb-6 italic">${p.desc}</p>
+              <p class="text-on-surface-variant font-body-md mb-4 sm:mb-6 italic text-sm sm:text-base">${p.desc}</p>
               <div class="flex flex-wrap gap-2">
                 ${p.tags.map(t=>`<span class="tag-chip">${t}</span>`).join("")}
               </div>
             </div>
           </div>
-          <div class="mt-8 flex ${btnJust} gap-3">
-            <a href="${p.url}" class="k-scan relative overflow-hidden border border-[#00F5FF] px-6 py-2
-                   text-[#00F5FF] font-label-caps uppercase tracking-tighter
-                   hover:bg-[#00F5FF]/10 transition-all text-[10px]">
+          <div class="mt-5 sm:mt-8 flex gap-3">
+            <a href="${p.url}" class="k-scan border border-[#00FF88] px-4 sm:px-6 py-2
+                   text-[#00FF88] font-label-caps uppercase tracking-tighter
+                   hover:bg-[#00FF88]/10 transition-all text-[10px]">
               DÉCRYPTER_SOURCE
             </a>
-            <a href="${p.github}" class="k-scan relative overflow-hidden border border-secondary/40 px-6 py-2
+            <a href="${p.github}" class="k-scan border border-secondary/40 px-4 sm:px-6 py-2
                    text-secondary font-label-caps uppercase tracking-tighter
                    hover:bg-secondary/10 transition-all text-[10px]">
               GITHUB
             </a>
           </div>
         </div>
-      </section>`;
-    }).join("");
-
+      </section>`).join("");
     requestAnimationFrame(observeScrollReveal);
   }
 
-  // ════════════════════════════════════
-  //  ABOUT INIT
-  // ════════════════════════════════════
+  // ── ABOUT ──
   function initAbout() {
-    // Skills cloud
     const cloud = document.getElementById("skills-cloud");
     if(cloud && !cloud.children.length) {
       cloud.innerHTML = DATA.skills.map(s =>
-        `<span class="px-3 py-1 bg-secondary/10 border border-secondary/30 text-secondary text-xs font-label-caps">${s}</span>`
+        `<span class="px-2 sm:px-3 py-1 bg-secondary/10 border border-secondary/30 text-secondary text-[10px] sm:text-xs font-label-caps">${s}</span>`
       ).join("");
     }
-
-    // Skill bars
     const barsEl = document.getElementById("skill-bars");
     if(barsEl && !barsEl.children.length) {
       barsEl.innerHTML = DATA.skillBars.map(b => `
@@ -1022,21 +1218,17 @@
           </div>
         </div>`).join("");
     }
-
-    // Timeline
     const tlEl = document.getElementById("timeline");
     if(tlEl && !tlEl.children.length) {
       tlEl.innerHTML = DATA.timeline.map((e,i) => `
-        <div class="relative pl-6 border-l border-primary/20">
+        <div class="relative pl-5 sm:pl-6 border-l border-primary/20">
           <div class="absolute left-[-5px] top-0 w-2 h-2 rounded-full
-                      ${i===0?"bg-primary shadow-[0_0_5px_#00f5ff]":"bg-primary/40"}"></div>
+                      ${i===0?"bg-primary shadow-[0_0_5px_#00FF88]":"bg-primary/40"}"></div>
           <div class="text-[10px] text-primary font-bold">${e.period}</div>
-          <div class="text-sm font-bold text-on-surface">${e.title}</div>
+          <div class="text-xs sm:text-sm font-bold text-on-surface">${e.title}</div>
           <div class="text-xs text-on-surface-variant italic">${e.company}</div>
         </div>`).join("");
     }
-
-    // Code typewriter
     typeCode();
   }
 
@@ -1045,26 +1237,16 @@
     if(!el || el.dataset.typed) return;
     el.dataset.typed = "1";
     el.innerHTML = "";
-
     const colorMap = {
-      pink:    "#f472b6",
-      yellow:  "#fde68a",
-      str:     "#34d399",
-      comment: "#4b5563",
-      num:     "#fb923c",
-      def:     "#afefdd",
+      pink:"#f472b6", yellow:"#fde68a", str:"#39FF14",
+      comment:"#4b5563", num:"#fb923c", def:"#a0ffb8",
     };
-
     let html = "";
     DATA.codeLines.forEach(l => {
-      const color = colorMap[l.t] || "#afefdd";
+      const color = colorMap[l.t] || "#a0ffb8";
       const text  = l.v.replace(/</g,"&lt;").replace(/>/g,"&gt;");
       html += `<span style="color:${color}">${text}</span>`;
     });
-
-    // Simulate typewriter
-    const chars = [...html.matchAll(/(>[^<]*<\/span>|<[^>]+>)/g)];
-    // Simpler: just fade in
     el.innerHTML = html;
     el.style.opacity = "0";
     requestAnimationFrame(() => {
@@ -1073,9 +1255,7 @@
     });
   }
 
-  // ════════════════════════════════════
-  //  CONTACT FORM
-  // ════════════════════════════════════
+  // ── CONTACT FORM ──
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form");
     if(!form) return;
@@ -1086,22 +1266,16 @@
       const message = form.message.value.trim();
       const fb      = document.getElementById("form-feedback");
       const lbl     = document.getElementById("submit-label");
-
       if(!name || !email || !message) {
-        showFeedback(fb, "ERREUR :: Tous les champs obligatoires doivent être remplis.", "error");
-        return;
+        showFeedback(fb, "ERREUR :: Tous les champs obligatoires doivent être remplis.", "error"); return;
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showFeedback(fb, "ERREUR :: Adresse email invalide.", "error");
-        return;
+        showFeedback(fb, "ERREUR :: Adresse email invalide.", "error"); return;
       }
-
-      // Simulate sending
       lbl.textContent = "TRANSMISSION EN COURS...";
       setTimeout(() => {
         showFeedback(fb, "TRANSMISSION_RÉUSSIE :: Message reçu. Réponse dans < 24 cycles.", "success");
-        form.reset();
-        lbl.textContent = "INITIER_TRANSFERT";
+        form.reset(); lbl.textContent = "INITIER_TRANSFERT";
         showToast("✓ Message envoyé avec succès");
       }, 1500);
     });
@@ -1109,7 +1283,7 @@
 
   function showFeedback(el, msg, type) {
     el.textContent = msg;
-    el.className = "mb-6 px-4 py-3 border text-sm font-label-caps " +
+    el.className = "mb-4 sm:mb-6 px-4 py-3 border text-xs sm:text-sm font-label-caps " +
       (type==="success"
         ? "border-emerald-500/40 bg-emerald-900/20 text-emerald-400"
         : "border-red-500/40 bg-red-900/20 text-red-400");
@@ -1117,9 +1291,6 @@
     setTimeout(() => el.classList.add("hidden"), 5000);
   }
 
-  // ════════════════════════════════════
-  //  TOAST
-  // ════════════════════════════════════
   function showToast(msg) {
     const t = document.getElementById("toast");
     document.getElementById("toast-msg").textContent = msg;
@@ -1127,16 +1298,14 @@
     setTimeout(() => t.classList.remove("show"), 3000);
   }
 
-  // ════════════════════════════════════
-  //  TERMINAL
-  // ════════════════════════════════════
+  // ── TERMINAL ──
   const termCommands = {
-    help:    () => `COMMANDES DISPONIBLES:\n  home      → Aller à l'accueil\n  projects  → Voir les projets\n  about     → À propos\n  contact   → Contact\n  clear     → Effacer le terminal\n  whoami    → Identité du système\n  date      → Date système`,
-    home:    () => { navigate("home"); toggleTerminal(); return "→ Navigation vers ACCUEIL"; },
-    projects:() => { navigate("projects"); toggleTerminal(); return "→ Navigation vers PROJETS"; },
-    about:   () => { navigate("about"); toggleTerminal(); return "→ Navigation vers À_PROPOS"; },
-    contact: () => { navigate("contact"); toggleTerminal(); return "→ Navigation vers CONTACT"; },
-    whoami:  () => `VOID_ARCHITECT_CORE\nVersion: 2.4.1 // Licence L1 Informatique\nStack: Python | Django | Flutter | TailwindCSS`,
+    help:    () => `COMMANDES:\n  home · projects · about · contact · clear · whoami · date`,
+    home:    () => { navigate("home");     toggleTerminal(); return "→ ACCUEIL"; },
+    projects:() => { navigate("projects"); toggleTerminal(); return "→ PROJETS"; },
+    about:   () => { navigate("about");    toggleTerminal(); return "→ À_PROPOS"; },
+    contact: () => { navigate("contact");  toggleTerminal(); return "→ CONTACT"; },
+    whoami:  () => `VOID_ARCHITECT_CORE\nStack: Python | Django | Flutter | TailwindCSS`,
     date:    () => new Date().toLocaleString("fr-FR"),
     clear:   () => { document.getElementById("term-history").innerHTML=""; return null; },
   };
@@ -1146,16 +1315,16 @@
     t.classList.toggle("hidden");
     t.classList.toggle("flex");
     if(!t.classList.contains("hidden")) {
-      addTermLine("Bienvenue dans VOID_TERMINAL. Tapez 'help' pour les commandes.", "secondary");
+      addTermLine("Bienvenue dans VOID_TERMINAL. Tapez 'help'.", "secondary");
       document.getElementById("term-input").focus();
     }
   }
 
   function addTermLine(text, color="primary") {
     const h = document.getElementById("term-history");
-    const cls = color==="secondary" ? "text-secondary" : color==="error" ? "text-red-400" : "text-primary";
+    const cls = color==="secondary"?"text-secondary":color==="error"?"text-red-400":"text-primary";
     const p = document.createElement("p");
-    p.className = `text-sm mb-1 ${cls}`;
+    p.className = `text-xs sm:text-sm mb-1 ${cls}`;
     p.textContent = text;
     h.appendChild(p);
     h.scrollTop = h.scrollHeight;
@@ -1167,15 +1336,10 @@
     const cmd   = input.value.trim().toLowerCase();
     input.value = "";
     if(!cmd) return;
-
     addTermLine(`void@architect:~$ ${cmd}`, "on-surface-variant");
     const fn = termCommands[cmd];
-    if(fn) {
-      const result = fn();
-      if(result) addTermLine(result, "secondary");
-    } else {
-      addTermLine(`Commande inconnue: '${cmd}'. Tapez 'help'.`, "error");
-    }
+    if(fn) { const r = fn(); if(r) addTermLine(r, "secondary"); }
+    else    addTermLine(`Commande inconnue: '${cmd}'. Tapez 'help'.`, "error");
   }
 
   document.addEventListener("keydown", e => {
@@ -1186,17 +1350,12 @@
     }
   });
 
-  // ════════════════════════════════════
-  //  SETTINGS
-  // ════════════════════════════════════
-  const settings = { particles: false, cursor: true, reduced: false };
+  // ── SETTINGS ──
+  const settings = { particles:false, cursor:true, reduced:false };
 
-  function toggleSettings() {
-    document.getElementById("settings-overlay").classList.toggle("hidden");
-  }
-  function closeSettings() {
-    document.getElementById("settings-overlay").classList.add("hidden");
-  }
+  function toggleSettings() { document.getElementById("settings-overlay").classList.toggle("hidden"); }
+  function closeSettings()  { document.getElementById("settings-overlay").classList.add("hidden"); }
+
   function toggleSetting(key) {
     settings[key] = !settings[key];
     const btn = document.getElementById("set-"+key);
@@ -1208,100 +1367,66 @@
       btn.querySelector(".toggle-knob").style.transform = "";
     }
     if(key==="cursor") {
-      document.getElementById("cursor").style.display = settings.cursor ? "" : "none";
-      document.getElementById("cursor-ring").style.display = settings.cursor ? "" : "none";
+      document.getElementById("cursor").style.display  = settings.cursor?"":"none";
+      document.getElementById("cursor-ring").style.display = settings.cursor?"":"none";
     }
     if(key==="particles") initParticles();
-    if(key==="reduced") {
-      document.documentElement.style.setProperty("--anim-duration", settings.reduced ? "0s" : "");
-    }
     showToast(`${key.toUpperCase()}: ${settings[key]?"ACTIVÉ":"DÉSACTIVÉ"}`);
   }
 
-  // ════════════════════════════════════
-  //  CURSOR
-  // ════════════════════════════════════
-  const cur  = document.getElementById("cursor");
+  // ── CURSOR ──
+  const cur = document.getElementById("cursor");
   const curR = document.getElementById("cursor-ring");
-  let mx=0, my=0, rx=0, ry=0;
-
+  let mx=0,my=0,rx=0,ry=0;
   document.addEventListener("mousemove", e => { mx=e.clientX; my=e.clientY; });
-
   function animateCursor() {
-    rx += (mx - rx) * 0.15;
-    ry += (my - ry) * 0.15;
-    cur.style.left  = mx + "px";
-    cur.style.top   = my + "px";
-    curR.style.left = rx + "px";
-    curR.style.top  = ry + "px";
+    rx += (mx-rx)*.15; ry += (my-ry)*.15;
+    cur.style.left  = mx+"px"; cur.style.top  = my+"px";
+    curR.style.left = rx+"px"; curR.style.top = ry+"px";
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
 
-  // ════════════════════════════════════
-  //  PARTICLES
-  // ════════════════════════════════════
+  // ── PARTICLES ──
   function initParticles() {
     const canvas = document.getElementById("particles-canvas");
     const ctx    = canvas.getContext("2d");
     canvas.style.opacity = settings.particles ? "0.3" : "0";
     if(!settings.particles) return;
-
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     const particles = Array.from({length:60}, () => ({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      vx: (Math.random()-.5)*.4,
-      vy: (Math.random()-.5)*.4,
-      r:  Math.random()*1.5+.5,
+      x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+      vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4, r:Math.random()*1.5+.5,
     }));
-
-    function drawParticles() {
+    function draw() {
       if(!settings.particles) return;
       ctx.clearRect(0,0,canvas.width,canvas.height);
       particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
+        p.x+=p.vx; p.y+=p.vy;
         if(p.x<0||p.x>canvas.width)  p.vx*=-1;
         if(p.y<0||p.y>canvas.height) p.vy*=-1;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(0,245,255,.6)";
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(0,255,136,.6)"; ctx.fill();
       });
-      // Lines between close particles
-      for(let i=0;i<particles.length;i++) {
-        for(let j=i+1;j<particles.length;j++) {
-          const dx=particles[i].x-particles[j].x;
-          const dy=particles[i].y-particles[j].y;
-          const d=Math.sqrt(dx*dx+dy*dy);
-          if(d<100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.strokeStyle=`rgba(0,245,255,${.15*(1-d/100)})`;
-            ctx.lineWidth=.5;
-            ctx.stroke();
-          }
+      for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++) {
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<100) {
+          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(0,255,136,${.15*(1-d/100)})`; ctx.lineWidth=.5; ctx.stroke();
         }
       }
-      requestAnimationFrame(drawParticles);
+      requestAnimationFrame(draw);
     }
-    drawParticles();
+    draw();
   }
 
   window.addEventListener("resize", () => {
-    const c=document.getElementById("particles-canvas");
+    const c = document.getElementById("particles-canvas");
     c.width=window.innerWidth; c.height=window.innerHeight;
   });
 
-  // ════════════════════════════════════
-  //  INIT
-  // ════════════════════════════════════
-  document.addEventListener("DOMContentLoaded", () => {
-    navigate("home");
-  });
+  document.addEventListener("DOMContentLoaded", () => navigate("home"));
   </script>
 </body>
 </html>
