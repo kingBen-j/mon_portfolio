@@ -1,3 +1,5 @@
+ {% load static %}
+
 <!DOCTYPE html>
 <html class="dark" lang="fr">
 <head>
@@ -685,7 +687,7 @@
           </h1>
           <p class="font-body-md text-on-surface-variant max-w-2xl border-l-2 border-primary/30 pl-6 sm:pl-8 italic text-sm sm:text-base">
             Extraction des données biographiques en cours...
-            Analyse de la structure logique de l'entité : Développeur Junior avec une affinité pour les systèmes distribués et les applications mobiles,
+            Analyse de la structure logique de l'entité : Développeur Debutant Avancer avec une affinité pour les systèmes distribués et les applications mobiles,
             passionné par les architectures complexes et le design cinétique.
           </p>
         </section>
@@ -695,12 +697,17 @@
           <!-- Identity -->
           <div class="sm:col-span-12 lg:col-span-7 glass-panel p-6 sm:p-8 spiral-card relative overflow-hidden group">
             <div class="absolute top-4 right-4 sm:right-6 font-label-caps text-primary/40 text-[9px]">METADATA: IDENTITY_V4.0</div>
-            <div class="flex flex-col sm:flex-row items-start gap-5 sm:gap-8">
-              <div class="relative w-full sm:w-40 h-36 sm:h-52 overflow-hidden border border-primary/20 bg-surface-container-low
-                          flex items-center justify-center flex-shrink-0">
-                <span class="material-symbols-outlined text-5xl sm:text-6xl text-primary/20">person</span>
-                <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-              </div>
+           <!-- ✅ Après — vraie image -->
+            <div class="relative w-full sm:w-40 h-36 sm:h-52 overflow-hidden border border-primary/20 flex-shrink-0">
+            
+              
+            <img
+              src="{% static 'assets/images/image1.jpeg' %}"
+              alt="Développeur en action"
+              class="w-full h-full object-cover object-top"
+            />
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+            </div>
               <div class="flex-1">
                 <h3 class="font-headline-md text-primary mb-3 sm:mb-4">Initialisation_du_Profil</h3>
                 <div class="space-y-3 sm:space-y-4 font-body-md text-on-surface-variant text-sm sm:text-base">
