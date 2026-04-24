@@ -982,15 +982,12 @@
   <script>
   const DATA = {
     projects: [
-      { id:1, title:"Noyau de Synchronisation", hex:"0x882A",
-        desc:"Orchestrateur d'architectures distribuées utilisant des protocoles de flux asynchrones. Optimisation des latences de 40%.",
-        tags:["Python","Django","REST","Docker"], cat:["web","backend"], url:"#", github:"#" },
-      { id:2, title:"Analyseur de Spectre K", hex:"0x4F12",
-        desc:"Outil de visualisation de données en temps réel pour l'analyse heuristique des anomalies de réseau chiffré.",
-        tags:["Flutter","Dart","FastAPI"], cat:["mobile","backend"], url:"#", github:"#" },
-      { id:3, title:"Interface Quantique", hex:"0x11B9",
-        desc:"Système de gestion d'actifs numériques basé sur la blockchain avec une UI pilotée par le son et la fréquence.",
-        tags:["React","Node.js","Web3"], cat:["web"], url:"#", github:"#" },
+      { id:1, title:"Simulateur de Capture des trames PAP et CHAP", hex:"0x882A",
+        desc:"Simulateur de capture de trames PAP et CHAP",
+        tags:["Python","Django","Tailwind css","Js"], cat:["web","backend"], url:"#", github:"#" },
+      { id:3, title:"Portfolio", hex:"0x11B9",
+        desc:"portfolio de Daniela coulibaly Alias dany caption Real Maker",
+        tags:["Tailwind css(Daisy UI)","Django","Javascript"], cat:["web"], url:"#", github:"#" },
       { id:4, title:"MyMeteo — API Météo", hex:"0x2C4D",
         desc:"Application Django intégrant l'API OpenWeatherMap avec interface Tailwind et gestion sécurisée des clés via .env.",
         tags:["Python","Django","Tailwind","API"], cat:["web","backend"], url:"#", github:"#" },
@@ -1003,9 +1000,9 @@
       { label:"API_INTEGRATION",  pct:85, color:"#ccffe8", shadow:"#ccffe8" },
     ],
     timeline: [
-      { period:"2024 — PRÉSENT", title:"Développeur Full-Stack", company:"Projets personnels & Freelance" },
-      { period:"2024",           title:"Licence 1 Informatique",  company:"Université" },
-      { period:"2023",           title:"Projets Flutter / Django", company:"Auto-formation intensive" },
+      { period:"2026 — PRÉSENT", title:"Développeur Full-Stack(Debutant Avancer),Vibe-Codeur", company:"Projets personnels & Freelance" },
+      { period:"2025-2026",           title:"Licence 2 Informatique",  company:"Université" },
+      
     ],
     homeStats: [
       { label:"PROJETS LIVRÉS", value:"4+",  pct:40 },
@@ -1015,7 +1012,7 @@
       { t:"pink",    v:"class " },   { t:"yellow",  v:"VoidArchitect" }, { t:"def", v:":\n" },
       { t:"str",     v:'    name    = "Israel"\n' },
       { t:"str",     v:'    vision  = "Elegance within entropy"\n' },
-      { t:"str",     v:'    stack   = ["Python","Django","Flutter"]\n\n' },
+      { t:"str",     v:'    stack   = ["Python","Django","Flutter","Javascript","HTML","CSS","Linux","Git","GitHub","Systeme et Reseau"]\n\n' },
       { t:"pink",    v:"    def " },  { t:"yellow",  v:"initialize" }, { t:"def", v:"(self):\n" },
       { t:"comment", v:"        # Refactoring chaos into order\n" },
       { t:"pink",    v:"        while " }, { t:"def", v:"entropy > " }, { t:"num", v:"0" }, { t:"def", v:":\n" },
@@ -1256,31 +1253,54 @@
   }
 
   // ── CONTACT FORM ──
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact-form");
-    if(!form) return;
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const name    = form.name.value.trim();
-      const email   = form.email.value.trim();
-      const message = form.message.value.trim();
-      const fb      = document.getElementById("form-feedback");
-      const lbl     = document.getElementById("submit-label");
-      if(!name || !email || !message) {
-        showFeedback(fb, "ERREUR :: Tous les champs obligatoires doivent être remplis.", "error"); return;
-      }
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showFeedback(fb, "ERREUR :: Adresse email invalide.", "error"); return;
-      }
-      lbl.textContent = "TRANSMISSION EN COURS...";
-      setTimeout(() => {
+ document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
+    const message = form.message.value.trim();
+    const fb      = document.getElementById("form-feedback");
+    const lbl     = document.getElementById("submit-label");
+
+    // Validation
+    if (!name || !email || !message) {
+      showFeedback(fb, "ERREUR :: Tous les champs obligatoires doivent être remplis.", "error");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFeedback(fb, "ERREUR :: Adresse email invalide.", "error");
+      return;
+    }
+
+    // Envoi
+    lbl.textContent = "TRANSMISSION EN COURS...";
+
+    fetch("https://formspree.io/f/xwvaaaaq", {  // ← remplace ici
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message })
+    })
+    .then(res => {
+      if (res.ok) {
         showFeedback(fb, "TRANSMISSION_RÉUSSIE :: Message reçu. Réponse dans < 24 cycles.", "success");
-        form.reset(); lbl.textContent = "INITIER_TRANSFERT";
+        form.reset();
+        lbl.textContent = "INITIER_TRANSFERT";
         showToast("✓ Message envoyé avec succès");
-      }, 1500);
+      } else {
+        showFeedback(fb, "ERREUR :: Échec de la transmission. Réessaie.", "error");
+        lbl.textContent = "INITIER_TRANSFERT";
+      }
+    })
+    .catch(() => {
+      showFeedback(fb, "ERREUR :: Connexion échouée. Vérifie ta connexion.", "error");
+      lbl.textContent = "INITIER_TRANSFERT";
     });
   });
-
+});
   function showFeedback(el, msg, type) {
     el.textContent = msg;
     el.className = "mb-4 sm:mb-6 px-4 py-3 border text-xs sm:text-sm font-label-caps " +
