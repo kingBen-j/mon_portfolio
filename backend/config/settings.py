@@ -113,14 +113,25 @@ ASGI_APPLICATION = "config.asgi.application"
 
 # Base de données ---------------------------------------------------------
 
-# En local : SQLite. Sur Render : la variable DATABASE_URL pointe vers Postgres.
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# En local : SQLite. En ligne : DATABASE_URL (Render, Supabase...).
+_database = dj_database_url.config(
+    default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    conn_max_age=600,
+    conn_health_checks=True,
+)
+
+# Le « transaction pooler » de Supabase (port 6543) ne sait pas gerer les
+# requetes preparees de psycopg : sans ce reglage Django echoue des la
+# premiere requete. Il ne garde pas non plus les connexions ouvertes entre
+# deux requetes, d'ou CONN_MAX_AGE a zero.
+if "pooler" in str(_database.get("HOST", "")) or str(_database.get("PORT")) == "6543":
+    _database["OPTIONS"] = {
+        **(_database.get("OPTIONS") or {}),
+        "prepare_threshold": None,
+    }
+    _database["CONN_MAX_AGE"] = 0
+
+DATABASES = {"default": _database}
 
 
 AUTH_PASSWORD_VALIDATORS = [
