@@ -1,15 +1,21 @@
-venv/
+# Python / Django
+backend/.venv/
+backend/db.sqlite3
+backend/media/
+backend/staticfiles/
+backend/.env
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-db.sqlite3
-env/
-.DS_Store
-/staticfiles/
-media/
-logs/
-.coverage
-htmlcov/
+*.py[cod]
 
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env*.local
+
+# Divers
+.DS_Store
+Thumbs.db
+
+# Sauvegarde du depot git imbrique du frontend
+frontend/.git.bak/
