@@ -3,3 +3,9 @@ djangorestframework==3.18.1
 django-cors-headers==4.9.0
 python-dotenv==1.2.3
 pillow==12.3.0
+
+# Production (Render)
+gunicorn==23.0.0
+whitenoise==6.11.0
+dj-database-url==3.0.1
+psycopg[binary]==3.2.12

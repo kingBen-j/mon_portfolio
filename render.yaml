@@ -1,0 +1,35 @@
+# Blueprint Render — API Django du portfolio BenDev.
+# Le frontend Next.js est deploye separement sur Vercel.
+
+databases:
+  - name: bendev-db
+    databaseName: bendev
+    user: bendev
+    plan: free
+
+services:
+  - type: web
+    name: bendev-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application
+    healthCheckPath: /api/site/
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bendev-db
+          property: connectionString
+      - key: PYTHON_VERSION
+        value: "3.13.1"
+      # A renseigner apres le premier deploiement Vercel :
+      # l'URL exacte du front, sinon le navigateur bloquera les appels API.
+      - key: DJANGO_CORS_ORIGINS
+        sync: false
+      - key: DJANGO_CSRF_ORIGINS
+        sync: false

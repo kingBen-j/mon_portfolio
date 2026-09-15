@@ -63,6 +63,64 @@ Rendez-vous sur http://127.0.0.1:8000/admin/ puis :
 
 ---
 
+## Mise en ligne
+
+Le site tourne en deux morceaux : **Vercel** sert le front Next.js, **Render**
+héberge l'API Django et sa base Postgres.
+
+### 1 · L'API sur Render
+
+Le dépôt contient un blueprint `render.yaml` : depuis
+[dashboard.render.com](https://dashboard.render.com) → *New* → *Blueprint*,
+pointez sur ce dépôt. Render crée le service web et la base d'un coup.
+
+`DJANGO_SECRET_KEY` est générée automatiquement, `DATABASE_URL` est branchée
+sur la base, et `DJANGO_DEBUG` vaut `False`. Il reste **deux variables à
+renseigner à la main** une fois le front en ligne (voir étape 3).
+
+Créez ensuite le compte administrateur, depuis le *Shell* du service Render :
+
+```bash
+python manage.py createsuperuser
+python manage.py seed_content
+```
+
+### 2 · Le front sur Vercel
+
+Sur [vercel.com](https://vercel.com) → *Add New Project* → importez ce dépôt.
+
+| Réglage | Valeur |
+| --- | --- |
+| Root Directory | `frontend` |
+| Framework | Next.js (détecté) |
+| Variable | `NEXT_PUBLIC_API_URL` = l'URL Render, ex. `https://bendev-api.onrender.com` |
+
+### 3 · Relier les deux
+
+Retour sur Render, renseignez l'URL Vercel — sans elle le navigateur bloquera
+les appels à l'API :
+
+| Variable | Valeur |
+| --- | --- |
+| `DJANGO_CORS_ORIGINS` | `https://votre-site.vercel.app` |
+| `DJANGO_CSRF_ORIGINS` | `https://votre-site.vercel.app` |
+
+### Ce qu'il faut savoir
+
+- **Les images téléversées ne survivent pas.** Le disque Render est éphémère :
+  tout visuel ajouté depuis l'admin disparaît au redéploiement suivant. Pour un
+  portfolio durable, il faudra un stockage externe (Cloudinary, S3) ou un
+  disque persistant Render (payant).
+- **L'offre gratuite Render s'endort** après 15 minutes sans trafic : la
+  première visite peut attendre ~50 secondes le réveil. Le site reste affiché
+  malgré tout — `api.js` retombe sur les données locales de
+  `frontend/src/data/profile.js` si l'API ne répond pas.
+- **Le contenu est figé au build.** Les pages sont prérendues avec ISR à
+  60 secondes : une modification dans l'admin apparaît à la minute suivante,
+  pas instantanément.
+
+---
+
 ## Structure des pages
 
 | Route | Contenu |
