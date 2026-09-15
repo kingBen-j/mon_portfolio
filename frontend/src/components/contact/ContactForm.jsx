@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { WhatsAppGlyph } from "@/components/layout/Header";
 import { whatsappLink, WHATSAPP_DISPLAY } from "@/data/profile";
-import { API_BASE } from "@/lib/api";
 
 const SUBJECTS = [
   "Création d'un site web",
@@ -31,10 +30,11 @@ export default function ContactForm() {
     event.preventDefault();
     setStatus("sending");
 
-    // 1. On archive le message côté Django (visible dans l'admin).
+    // 1. On archive le message côté Django, via le relais interne :
+    //    même origine, donc aucune contrainte CORS en production.
     let stored = true;
     try {
-      const res = await fetch(`${API_BASE}/api/contact/`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

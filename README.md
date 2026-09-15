@@ -63,61 +63,56 @@ Rendez-vous sur http://127.0.0.1:8000/admin/ puis :
 
 ---
 
-## Mise en ligne
+## Le site en ligne
 
-Le site tourne en deux morceaux : **Vercel** sert le front Next.js, **Render**
-héberge l'API Django et sa base Postgres.
-
-### 1 · L'API sur Render
-
-Le dépôt contient un blueprint `render.yaml` : depuis
-[dashboard.render.com](https://dashboard.render.com) → *New* → *Blueprint*,
-pointez sur ce dépôt. Render crée le service web et la base d'un coup.
-
-`DJANGO_SECRET_KEY` est générée automatiquement, `DATABASE_URL` est branchée
-sur la base, et `DJANGO_DEBUG` vaut `False`. Il reste **deux variables à
-renseigner à la main** une fois le front en ligne (voir étape 3).
-
-Créez ensuite le compte administrateur, depuis le *Shell* du service Render :
-
-```bash
-python manage.py createsuperuser
-python manage.py seed_content
-```
-
-### 2 · Le front sur Vercel
-
-Sur [vercel.com](https://vercel.com) → *Add New Project* → importez ce dépôt.
-
-| Réglage | Valeur |
+| | URL |
 | --- | --- |
-| Root Directory | `frontend` |
-| Framework | Next.js (détecté) |
-| Variable | `NEXT_PUBLIC_API_URL` = l'URL Render, ex. `https://bendev-api.onrender.com` |
+| Site | **https://bendev-web.onrender.com** |
+| API | https://bendev-api.onrender.com/api/site/ |
+| Admin | https://bendev-api.onrender.com/admin/ |
 
-### 3 · Relier les deux
+Les deux services sont hébergés sur **Render** (région Francfort), déployés
+automatiquement à chaque `push` sur `main`.
 
-Retour sur Render, renseignez l'URL Vercel — sans elle le navigateur bloquera
-les appels à l'API :
+| Service | Rôle | Build | Démarrage |
+| --- | --- | --- | --- |
+| `bendev-web` | Next.js | `cd frontend && npm ci && npm run build` | `cd frontend && npm start` |
+| `bendev-api` | Django | `cd backend && ./build.sh` | `gunicorn config.wsgi:application` |
 
-| Variable | Valeur |
-| --- | --- |
-| `DJANGO_CORS_ORIGINS` | `https://votre-site.vercel.app` |
-| `DJANGO_CSRF_ORIGINS` | `https://votre-site.vercel.app` |
+`build.sh` installe, collecte les statiques, migre, crée le compte admin
+(variables `DJANGO_SUPERUSER_*`) puis rejoue `seed_content`. L'offre gratuite
+n'ouvre pas de shell : tout doit passer par là.
+
+### Reste à faire : brancher Postgres
+
+Une base `bendev-db` est créée mais **pas encore reliée**. Tant que
+`DATABASE_URL` est absente, Django écrit dans un SQLite recréé à chaque
+build : le site fonctionne, mais toute saisie faite dans l'admin disparaît
+au déploiement suivant.
+
+Dashboard Render → `bendev-api` → *Environment* → *Add Environment Variable*
+→ **Add from database** → `bendev-db`, *Internal Connection String*, clé
+`DATABASE_URL`.
 
 ### Ce qu'il faut savoir
 
-- **Les images téléversées ne survivent pas.** Le disque Render est éphémère :
-  tout visuel ajouté depuis l'admin disparaît au redéploiement suivant. Pour un
-  portfolio durable, il faudra un stockage externe (Cloudinary, S3) ou un
-  disque persistant Render (payant).
-- **L'offre gratuite Render s'endort** après 15 minutes sans trafic : la
-  première visite peut attendre ~50 secondes le réveil. Le site reste affiché
-  malgré tout — `api.js` retombe sur les données locales de
-  `frontend/src/data/profile.js` si l'API ne répond pas.
-- **Le contenu est figé au build.** Les pages sont prérendues avec ISR à
-  60 secondes : une modification dans l'admin apparaît à la minute suivante,
-  pas instantanément.
+- **Les services gratuits s'endorment** après 15 minutes sans trafic : la
+  première visite peut attendre ~50 secondes. Si l'API dort quand le front
+  se réveille, `api.js` retombe sur `frontend/src/data/profile.js` et le
+  site reste affichable.
+- **La base gratuite expire au bout de 30 jours.** Render la supprimera ;
+  il faudra passer à l'offre payante ou en recréer une.
+- **Les images ajoutées depuis l'admin ne persistent pas** (disque
+  éphémère). Celles du portfolio sont versionnées dans `backend/media/`,
+  donc toujours présentes. Pour des ajouts durables : Cloudinary ou S3.
+
+### Passer le front sur Vercel
+
+Possible à tout moment, et préférable (pas de mise en veille) :
+[vercel.com/new](https://vercel.com/new) → importer le dépôt → *Root
+Directory* `frontend` → variable `NEXT_PUBLIC_API_URL` =
+`https://bendev-api.onrender.com`. Ajouter ensuite l'URL Vercel dans
+`DJANGO_CORS_ORIGINS` et `DJANGO_CSRF_ORIGINS` côté Render.
 
 ---
 

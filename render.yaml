@@ -1,5 +1,6 @@
-# Blueprint Render — API Django du portfolio BenDev.
-# Le frontend Next.js est deploye separement sur Vercel.
+# Blueprint Render — portfolio BenDev.
+# Deux services : l'API Django et le front Next.js, créés d'un seul coup
+# depuis dashboard.render.com → New → Blueprint.
 
 databases:
   - name: bendev-db
@@ -8,6 +9,7 @@ databases:
     plan: free
 
 services:
+  # --- API Django + administration ------------------------------------
   - type: web
     name: bendev-api
     runtime: python
@@ -27,9 +29,30 @@ services:
           property: connectionString
       - key: PYTHON_VERSION
         value: "3.13.1"
-      # A renseigner apres le premier deploiement Vercel :
-      # l'URL exacte du front, sinon le navigateur bloquera les appels API.
-      - key: DJANGO_CORS_ORIGINS
+      # Compte administrateur créé au premier build (l'offre gratuite
+      # n'ouvre pas de shell). À renseigner dans le dashboard.
+      - key: DJANGO_SUPERUSER_USERNAME
         sync: false
-      - key: DJANGO_CSRF_ORIGINS
+      - key: DJANGO_SUPERUSER_EMAIL
         sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+
+  # --- Front Next.js ---------------------------------------------------
+  - type: web
+    name: bendev-web
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      # Render fournit l'hôte sans protocole : resolveApiUrl() complète
+      # en https. Aucune URL à recopier à la main.
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: bendev-api
+          property: host
+      - key: NODE_VERSION
+        value: "22.22.0"

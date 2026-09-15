@@ -1,15 +1,17 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { resolveApiUrl, isLocalApi } from "./src/lib/api-url.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL = resolveApiUrl(process.env.NEXT_PUBLIC_API_URL);
 const api = new URL(API_URL);
 
 // Django tourne en local pendant le développement. Next 16 refuse par défaut
 // d'optimiser une image servie depuis une IP locale (protection anti-SSRF) :
 // on ne lève cette protection que lorsque l'API est effectivement locale.
-const apiIsLocal = ["localhost", "127.0.0.1", "[::1]"].includes(api.hostname);
+const apiIsLocal = isLocalApi(API_URL);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

@@ -24,6 +24,24 @@ def env_list(name, default=""):
     return [item.strip() for item in raw.split(",") if item.strip()]
 
 
+def env_origins(name, default=""):
+    """
+    Origines CORS / CSRF.
+
+    Django exige un schéma explicite. Render, lui, fournit les hôtes nus
+    (« bendev-web.onrender.com ») : on complète en https, ou en http pour
+    les adresses locales.
+    """
+    origins = []
+    for item in env_list(name, default):
+        if "://" in item:
+            origins.append(item.rstrip("/"))
+            continue
+        scheme = "http" if item.startswith(("localhost", "127.0.0.1")) else "https"
+        origins.append(f"{scheme}://{item}".rstrip("/"))
+    return origins
+
+
 SECRET_KEY = os.getenv(
     "DJANGO_SECRET_KEY",
     "django-insecure-dev-only-t3!2so-3ewup34#p2j98!pn^lf9q66_h=z^c3-w*n&!cpc#z1v",
@@ -150,13 +168,15 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {"anon": "60/hour"},
 }
 
-# Le front Next.js tourne sur un autre port : il faut l'autoriser.
-CORS_ALLOWED_ORIGINS = env_list(
+# Le formulaire de contact passe par un relais interne à Next.js : le
+# navigateur n'appelle jamais Django directement. Ces réglages ne servent
+# donc qu'au développement, ou à un appel direct à l'API depuis un autre site.
+CORS_ALLOWED_ORIGINS = env_origins(
     "DJANGO_CORS_ORIGINS",
     "http://localhost:3000,http://127.0.0.1:3000",
 )
 
-CSRF_TRUSTED_ORIGINS = env_list(
+CSRF_TRUSTED_ORIGINS = env_origins(
     "DJANGO_CSRF_ORIGINS",
     "http://localhost:3000,http://127.0.0.1:3000",
 ) + CSRF_TRUSTED_ORIGINS_EXTRA
