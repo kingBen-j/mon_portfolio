@@ -1,7 +1,10 @@
 # Python / Django
 backend/.venv/
 backend/db.sqlite3
-backend/media/
+# Les visuels du portfolio sont versionnes : le disque Render est ephemere,
+# sans eux le site en ligne s'afficherait sans aucune image. Les ajouts faits
+# depuis l'admin en production ne persistent pas (voir README).
+# backend/media/
 backend/staticfiles/
 backend/.env
 __pycache__/
