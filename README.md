@@ -106,6 +106,24 @@ Dashboard Render → `bendev-api` → *Environment* → *Add Environment Variabl
   éphémère). Celles du portfolio sont versionnées dans `backend/media/`,
   donc toujours présentes. Pour des ajouts durables : Cloudinary ou S3.
 
+### Déployer le front sur Netlify
+
+Le fichier `netlify.toml` à la racine du dépôt configure le déploiement du
+portfolio : la commande `npm ci --include=dev && npm run build` installe les
+dépendances verrouillées dans `frontend/`, puis compile l'application dans
+ce dossier et utilise la sortie `.next`. Cette installation explicite permet
+aussi les déploiements via la CLI sans dépendances préinstallées et inclut
+Tailwind et PostCSS, nécessaires à la compilation. L'adaptateur
+Next.js de Netlify prend en charge les pages et la route `/api/contact`.
+Il ne faut pas publier la racine du dépôt ou seulement `frontend/public/` :
+ces dossiers ne contiennent pas l'application compilée.
+
+Le backend Django reste hébergé séparément. Pour utiliser son contenu,
+configurez `NEXT_PUBLIC_API_URL` dans les variables d'environnement du site
+Netlify avec l'adresse publique de votre API, puis redéployez. Sans API
+accessible, le portfolio affiche les données locales de secours ; les
+messages du formulaire ne sont pas enregistrés dans Django.
+
 ### Passer le front sur Vercel
 
 Possible à tout moment, et préférable (pas de mise en veille) :
