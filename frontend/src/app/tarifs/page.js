@@ -3,12 +3,13 @@ import PageHeader from "@/components/layout/PageHeader";
 import Section from "@/components/ui/Section";
 import Badge from "@/components/ui/Badge";
 import WhatsAppCta from "@/components/ui/WhatsAppCta";
+import CreationOffers from "@/components/pricing/CreationOffers";
 import { WHATSAPP_NUMBER } from "@/data/profile";
 
 export const metadata = {
   title: "Tarifs",
   description:
-    "Comparez les forfaits de maintenance et d’accompagnement des sites web de BenDev, à partir de 15 000 FCFA par mois.",
+    "Découvrez les tarifs de création de sites et d’applications web de BenDev, ainsi que les forfaits de maintenance et d’accompagnement.",
 };
 
 const PLANS = [
@@ -69,15 +70,17 @@ export default function PricingPage() {
   return (
     <div style={{ "--color-mute-2": "var(--color-mute)" }}>
       <PageHeader
-        kicker="Un suivi dans la durée"
+        kicker="De votre projet à son suivi"
         title="Des tarifs"
         accent="clairs."
-        intro="Votre site est en ligne. Gardons-le fonctionnel, à jour et adapté à vos besoins, avec un accompagnement défini ensemble."
+        intro="Création de sites, applications sur mesure et maintenance : choisissez une offre adaptée à votre projet, avec un périmètre défini ensemble."
         meta={[
           { label: "Devise", value: "FCFA" },
-          { label: "Forfaits", value: "Mensuels ou annuels" },
+          { label: "Offres", value: "Création & maintenance" },
         ]}
       />
+
+      <CreationOffers />
 
       <Section
         id="maintenance"

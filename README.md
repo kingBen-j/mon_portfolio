@@ -146,7 +146,7 @@ Directory* `frontend` → variable `NEXT_PUBLIC_API_URL` =
 | `/projets` | Le portfolio complet |
 | `/formation` | Timeline des diplômes + certifications |
 | `/contact` | WhatsApp en direct + formulaire |
-| `/tarifs` | Forfaits de maintenance et d’accompagnement, tarifs mensuels et annuels, conditions |
+| `/tarifs` | Offres de création de sites et d’applications web, forfaits de maintenance, conditions |
 
 ---
 
