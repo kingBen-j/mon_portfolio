@@ -6,7 +6,7 @@ Portfolio personnel en deux parties :
 
 | Dossier | Rôle | Stack |
 | --- | --- | --- |
-| `frontend/` | Le site public (6 pages) | Next.js 16 · React 19 · Tailwind 4 |
+| `frontend/` | Le site public (7 pages) | Next.js 16 · React 19 · Tailwind 4 |
 | `backend/` | L'API de contenu + admin | Django 6 · Django REST Framework · SQLite |
 
 Le contenu du site se remplit depuis l'**admin Django** — aucun besoin de toucher
@@ -146,6 +146,7 @@ Directory* `frontend` → variable `NEXT_PUBLIC_API_URL` =
 | `/projets` | Le portfolio complet |
 | `/formation` | Timeline des diplômes + certifications |
 | `/contact` | WhatsApp en direct + formulaire |
+| `/tarifs` | Forfaits de maintenance et d’accompagnement, tarifs mensuels et annuels, conditions |
 
 ---
 
