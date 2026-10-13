@@ -114,7 +114,9 @@ dépendances verrouillées dans `frontend/`, puis compile l'application dans
 ce dossier et utilise la sortie `.next`. Cette installation explicite permet
 aussi les déploiements via la CLI sans dépendances préinstallées et inclut
 Tailwind et PostCSS, nécessaires à la compilation. L'adaptateur
-Next.js de Netlify prend en charge les pages et la route `/api/contact`.
+`@netlify/plugin-nextjs` est activé explicitement dans `netlify.toml` pour
+prendre en charge les pages et la route `/api/contact`, même lorsque la
+détection automatique du framework ne l'active pas.
 Il ne faut pas publier la racine du dépôt ou seulement `frontend/public/` :
 ces dossiers ne contiennent pas l'application compilée.
 
