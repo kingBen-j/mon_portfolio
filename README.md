@@ -6,7 +6,7 @@ Portfolio personnel en deux parties :
 
 | Dossier | Rôle | Stack |
 | --- | --- | --- |
-| `frontend/` | Le site public (6 pages) | Next.js 16 · React 19 · Tailwind 4 |
+| `frontend/` | Le site public (7 pages) | Next.js 16 · React 19 · Tailwind 4 |
 | `backend/` | L'API de contenu + admin | Django 6 · Django REST Framework · SQLite |
 
 Le contenu du site se remplit depuis l'**admin Django** — aucun besoin de toucher
@@ -106,6 +106,26 @@ Dashboard Render → `bendev-api` → *Environment* → *Add Environment Variabl
   éphémère). Celles du portfolio sont versionnées dans `backend/media/`,
   donc toujours présentes. Pour des ajouts durables : Cloudinary ou S3.
 
+### Déployer le front sur Netlify
+
+Le fichier `netlify.toml` à la racine du dépôt configure le déploiement du
+portfolio : la commande `npm ci --include=dev && npm run build` installe les
+dépendances verrouillées dans `frontend/`, puis compile l'application dans
+ce dossier et utilise la sortie `.next`. Cette installation explicite permet
+aussi les déploiements via la CLI sans dépendances préinstallées et inclut
+Tailwind et PostCSS, nécessaires à la compilation. L'adaptateur
+`@netlify/plugin-nextjs` est activé explicitement dans `netlify.toml` pour
+prendre en charge les pages et la route `/api/contact`, même lorsque la
+détection automatique du framework ne l'active pas.
+Il ne faut pas publier la racine du dépôt ou seulement `frontend/public/` :
+ces dossiers ne contiennent pas l'application compilée.
+
+Le backend Django reste hébergé séparément. Pour utiliser son contenu,
+configurez `NEXT_PUBLIC_API_URL` dans les variables d'environnement du site
+Netlify avec l'adresse publique de votre API, puis redéployez. Sans API
+accessible, le portfolio affiche les données locales de secours ; les
+messages du formulaire ne sont pas enregistrés dans Django.
+
 ### Passer le front sur Vercel
 
 Possible à tout moment, et préférable (pas de mise en veille) :
@@ -126,6 +146,7 @@ Directory* `frontend` → variable `NEXT_PUBLIC_API_URL` =
 | `/projets` | Le portfolio complet |
 | `/formation` | Timeline des diplômes + certifications |
 | `/contact` | WhatsApp en direct + formulaire |
+| `/tarifs` | Offres de création de sites et d’applications web, forfaits de maintenance, conditions |
 
 ---
 
